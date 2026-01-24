@@ -1,0 +1,39 @@
+# CHARGE PHASE: Increment charge score while sneaking on slot 4 (NOT on cooldown)
+execute as @a[scores={tobi_slot=4,tobi_return_cooldown=0},predicate=tobi:is_sneaking] run scoreboard players add @s tobi_return_charge 1
+
+# Reset charge if player stops sneaking or switches slot
+execute as @a[scores={tobi_slot=4}] unless predicate tobi:is_sneaking run scoreboard players set @s tobi_return_charge 0
+execute as @a unless score @s tobi_slot matches 4 run scoreboard players set @s tobi_return_charge 0
+
+# Ender particles while charging return
+execute as @a[scores={tobi_slot=4,tobi_return_charge=1..},predicate=tobi:is_sneaking] at @s run particle minecraft:portal ~ ~1 ~ 0.5 0.5 0.5 0.2 10 force
+
+# Apply weakness to nearby entities within 5 blocks while returning
+execute as @a[scores={tobi_slot=4,tobi_return_cooldown=0},predicate=tobi:is_sneaking] at @s run effect give @e[type=!player,distance=..5] minecraft:weakness 5 255 true
+
+# Action bar feedback showing charge progress
+execute as @a[scores={tobi_slot=4,tobi_return_charge=1..9},predicate=tobi:is_sneaking] run title @s actionbar {"text":"▰ CHARGING RETURN ▰","color":"aqua","bold":true}
+execute as @a[scores={tobi_slot=4,tobi_return_charge=10..19},predicate=tobi:is_sneaking] run title @s actionbar {"text":"▰▰ CHARGING RETURN ▰▰","color":"aqua","bold":true}
+execute as @a[scores={tobi_slot=4,tobi_return_charge=20..29},predicate=tobi:is_sneaking] run title @s actionbar {"text":"▰▰▰ CHARGING RETURN ▰▰▰","color":"aqua","bold":true}
+execute as @a[scores={tobi_slot=4,tobi_return_charge=30..39},predicate=tobi:is_sneaking] run title @s actionbar {"text":"▰▰▰▰ ALMOST READY ▰▰▰▰","color":"dark_aqua","bold":true}
+
+# ACTIVATION: When charge reaches 40 - Return all kidnapped entities
+# Step 1: Reset their scores and remove tag
+execute as @a[scores={tobi_slot=4,tobi_return_charge=40..},predicate=tobi:is_sneaking] run scoreboard players set @e[tag=tobi_kidnapped] tobi_entity_marked 0
+execute as @a[scores={tobi_slot=4,tobi_return_charge=40..},predicate=tobi:is_sneaking] run scoreboard players set @e[tag=tobi_kidnapped] tobi_maintain_timer 0
+
+# Step 2: Teleport them to player
+execute as @a[scores={tobi_slot=4,tobi_return_charge=40..},predicate=tobi:is_sneaking] at @s run tp @e[tag=tobi_kidnapped] @s
+
+# Step 3: Clear effects and tags
+execute as @a[scores={tobi_slot=4,tobi_return_charge=40..},predicate=tobi:is_sneaking] run effect clear @e[tag=tobi_kidnapped] minecraft:blindness
+execute as @a[scores={tobi_slot=4,tobi_return_charge=40..},predicate=tobi:is_sneaking] run tag @e[tag=tobi_kidnapped] remove tobi_kidnapped
+
+# Message to player
+execute as @a[scores={tobi_slot=4,tobi_return_charge=40..},predicate=tobi:is_sneaking] run tellraw @s {"text":"[Kamui] Entities returned from the void dimension!","color":"aqua","bold":true}
+
+# Start cooldown for the player
+execute as @a[scores={tobi_slot=4,tobi_return_charge=40..},predicate=tobi:is_sneaking] run scoreboard players set @s tobi_return_cooldown 1
+
+# Reset charge after activation
+execute as @a[scores={tobi_return_charge=40..}] run scoreboard players set @s tobi_return_charge 0

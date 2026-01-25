@@ -1,1 +1,0 @@
-execute at @s run particle minecraft:dust{color:[0.2,0.2,0.2],scale:0.5} ^ ^ ^ 0 0 0 0 1 force

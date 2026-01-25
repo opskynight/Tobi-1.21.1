@@ -1,25 +1,13 @@
-# Detect if player is holding slot 1 and sneaking AND wearing armor
+# 1. Increase charge if Slot 1 + Sneaking + Survival + Has Armor
 execute as @a[scores={tobi_slot=1,tobi_has_armor=1},predicate=tobi:is_sneaking,gamemode=survival] run scoreboard players add @s tobi_kamui_charge 1
 
-# NEW - Start deploy animation when charging begins (MOVED UP)
-execute as @a[scores={tobi_slot=1,tobi_kamui_charge=1,tobi_has_armor=1},predicate=tobi:is_sneaking,gamemode=survival] run function tobi:kamui/trigger_deploy
+# 2. Reset charge if they stop sneaking OR change slots OR no armor
+execute as @a[scores={tobi_kamui_charge=1..}] unless score @s tobi_slot matches 1 run scoreboard players set @s tobi_kamui_charge 0
+execute as @a[scores={tobi_kamui_charge=1..}] unless predicate tobi:is_sneaking run scoreboard players set @s tobi_kamui_charge 0
+execute as @a[scores={tobi_kamui_charge=1..}] unless score @s tobi_has_armor matches 1 run scoreboard players set @s tobi_kamui_charge 0
 
-# Reset charge if player stops sneaking or changes slot
-execute as @a unless score @s tobi_slot matches 1 run scoreboard players set @s tobi_kamui_charge 0
-execute as @a unless predicate tobi:is_sneaking run scoreboard players set @s tobi_kamui_charge 0
+# 3. Action bar feedback while charging
+execute as @a[scores={tobi_slot=1,tobi_kamui_charge=1..99},predicate=tobi:is_sneaking] run title @s actionbar {"text":"⬤ CHARGING KAMUI ⬤","color":"dark_purple","bold":true}
 
-# Reset if armor is removed
-execute as @a[scores={tobi_has_armor=0}] run scoreboard players set @s tobi_kamui_charge 0
-
-# Reset charge if player is already in kamui mode
-execute as @a[scores={tobi_kamui_active=1..}] run scoreboard players set @s tobi_kamui_charge 0
-
-# Action bar feedback
-execute as @a[scores={tobi_slot=1,tobi_kamui_charge=1..79},predicate=tobi:is_sneaking] run title @s actionbar {"text":"⬤ CHARGING KAMUI ⬤","color":"dark_purple","bold":true}
-
-# Activate kamui when charge reaches 80 ticks (4 seconds) - CHANGED FROM 40
-execute as @a[scores={tobi_kamui_charge=80..}] run function tobi:kamui/activate
-
-# NEW - Reset animation if charge is cancelled
-execute as @a[scores={kamui.state=1..2}] unless score @s tobi_kamui_charge matches 1.. run scoreboard players set @s kamui.state 0
-execute as @a[scores={kamui.state=1..2}] unless score @s tobi_kamui_charge matches 1.. run scoreboard players set @s kamui.frame 0
+# 4. On 100th tick (5 seconds), activate Kamui
+execute as @a[scores={tobi_kamui_charge=100..}] run function tobi:kamui/activate

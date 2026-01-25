@@ -1,38 +1,42 @@
-# Create scoreboard objectives
+# Core Logic
+scoreboard objectives add tobi_slot dummy
+scoreboard objectives add tobi_has_armor dummy
+
+# Phasing (Slot 0)
 scoreboard objectives add tobi_phase dummy
 scoreboard objectives add tobi_underground dummy
-scoreboard objectives add tobi_slot dummy
 
-# Kamui Teleport scoreboards
+# Kamui Teleport (Slot 1)
 scoreboard objectives add tobi_kamui_charge dummy
 scoreboard objectives add tobi_kamui_active dummy
+scoreboard objectives add tobi_kamui_pos_x dummy
+scoreboard objectives add tobi_kamui_pos_y dummy
+scoreboard objectives add tobi_kamui_pos_z dummy
+scoreboard objectives add tobi_temp_x dummy
+scoreboard objectives add tobi_temp_y dummy
+scoreboard objectives add tobi_temp_z dummy
+scoreboard objectives add tobi_kamui_stillness dummy
+scoreboard objectives add tobi_kamui_return_countdown dummy
 
-# Time Barrier scoreboards
+# Time Barrier (Slot 2)
 scoreboard objectives add tobi_barrier_timer dummy
 
-# NEW - Kamui Raycast scoreboards
+# Kamui Kidnap (Slot 3)
 scoreboard objectives add tobi_ray_distance dummy
 scoreboard objectives add tobi_ray_hit dummy
 scoreboard objectives add tobi_kamui_kidnap_charge dummy
 scoreboard objectives add tobi_kamui_kidnap_cooldown dummy
 
-# Return ability scoreboards
+# Return Ability (Slot 4)
 scoreboard objectives add tobi_return_cooldown dummy
 scoreboard objectives add tobi_return_charge dummy
+scoreboard objectives add tobi_entity_marked dummy
+scoreboard objectives add tobi_maintain_timer dummy
 
-# Armor detection
-scoreboard objectives add tobi_has_armor dummy
-
-# NEW - Kamui Spiral Animation scoreboards
-scoreboard objectives add kamui_state dummy
-scoreboard objectives add kamui_frame dummy
-scoreboard objectives add kamui_timer dummy
-
-# Test Spiral scoreboards
+# Spiral Animation (Slot 6)
 scoreboard objectives add spiral_state dummy
 scoreboard objectives add spiral_scale dummy
 scoreboard objectives add spiral_timer dummy
 scoreboard objectives add spiral_rotation dummy
 
-# Confirmation message
-tellraw @a {"text":"[Tobi] Datapack loaded! Wear full Tobi armor to unlock abilities.","color":"dark_purple","bold":true}
+tellraw @a {"text":"[Tobi] Datapack Loaded! All systems online.","color":"gold"}

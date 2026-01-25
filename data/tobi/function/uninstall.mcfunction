@@ -1,63 +1,36 @@
 # Remove all scoreboard objectives
+scoreboard objectives remove tobi_slot
+scoreboard objectives remove tobi_has_armor
 scoreboard objectives remove tobi_phase
 scoreboard objectives remove tobi_underground
-scoreboard objectives remove tobi_slot
-
-# Kamui scoreboards
 scoreboard objectives remove tobi_kamui_charge
 scoreboard objectives remove tobi_kamui_active
-
-# Barrier scoreboard
+scoreboard objectives remove tobi_kamui_pos_x
+scoreboard objectives remove tobi_kamui_pos_y
+scoreboard objectives remove tobi_kamui_pos_z
+scoreboard objectives remove tobi_temp_x
+scoreboard objectives remove tobi_temp_y
+scoreboard objectives remove tobi_temp_z
+scoreboard objectives remove tobi_kamui_stillness
+scoreboard objectives remove tobi_kamui_return_countdown
 scoreboard objectives remove tobi_barrier_timer
-
-# Raycast Kamui Kidnap scoreboards
 scoreboard objectives remove tobi_ray_distance
 scoreboard objectives remove tobi_ray_hit
 scoreboard objectives remove tobi_kamui_kidnap_charge
 scoreboard objectives remove tobi_kamui_kidnap_cooldown
-
-# Return scoreboards
 scoreboard objectives remove tobi_return_cooldown
 scoreboard objectives remove tobi_return_charge
-
-# Armor detection scoreboard
-scoreboard objectives remove tobi_has_armor
-
-# NEW - Kamui Animation scoreboards
-scoreboard objectives remove kamui_state
-scoreboard objectives remove kamui_frame
-scoreboard objectives remove kamui_timer
-
-# Remove all markers
-kill @e[type=armor_stand,tag=kamui_marker]
-
-# Remove all tags
-tag @a remove tobi_armor_notified
-tag @a remove kamui_raycaster
-tag @a remove raycast_done
-tag @a remove raycast_hit
-tag @e remove kamui_target
-tag @e remove tobi_kidnapped
-
-# Return all spectators to survival
-gamemode survival @a[gamemode=spectator]
-
-# Clear all effects from entities
-effect clear @e minecraft:blindness
-effect clear @e minecraft:weakness
-effect clear @e minecraft:resistance
-effect clear @e minecraft:slowness
-effect clear @e minecraft:wither
-effect clear @e minecraft:night_vision
-effect clear @e minecraft:saturation
-effect clear @e minecraft:health_boost
-effect clear @e minecraft:glowing
-
-# Test Spiral scoreboards
+scoreboard objectives remove tobi_entity_marked
+scoreboard objectives remove tobi_maintain_timer
 scoreboard objectives remove spiral_state
-scoreboard objectives remove spiral_rotation
 scoreboard objectives remove spiral_scale
 scoreboard objectives remove spiral_timer
+scoreboard objectives remove spiral_rotation
 
-# Confirmation
+# Clean up entities and effects
+kill @e[type=armor_stand,tag=kamui_marker]
+kill @e[type=marker,tag=kamui_spinner]
+gamemode survival @a[gamemode=spectator]
+effect clear @e
+
 tellraw @a {"text":"[Tobi] Datapack uninstalled successfully.","color":"red"}

@@ -1,44 +1,43 @@
-# Main tick function - runs all abilities
-
-# ARMOR DETECTION - Check if player has full Tobi armor set
+# --- GLOBAL CHECKS ---
 function tobi:armor/detect
 function tobi:armor/buffs
 
-# Phasing (Slot 0)
+# --- ABILITIES BY SLOT ---
+
+# Slot 0: Phasing
 function tobi:phasing/detect_activation
 function tobi:phasing/sink
 function tobi:phasing/check_underground
 function tobi:phasing/check_surface
 
-# Kamui Teleport (Slot 1)
+# Slot 1: Kamui Teleport
 function tobi:kamui/charge
-function tobi:kamui/countdown
+function tobi:kamui/detect_stillness
+# Ensure your return_countdown handles the scoreboard tobi:kamui_return_countdown
 
-# Time Barrier (Slot 2)
+# Slot 2: Time Barrier (Intangibility)
 function tobi:barrier/detect
 function tobi:barrier/timer
 function tobi:barrier/activate
 function tobi:barrier/display
 
-# NEW - Kamui Kidnap with Raycast (Slot 3)
+# Slot 3: Kamui Kidnap (Raycast)
 function tobi:kamui_kidnap/detect
 function tobi:kamui_kidnap/raycast_control
 function tobi:kamui_kidnap/marker_effects
 function tobi:kamui_kidnap/charge_kidnap
 function tobi:kamui_kidnap/cooldown
 
-# Return (Slot 4)
+# Slot 4: Return Entities
 function tobi:return/detect
 function tobi:return/teleport_back
 function tobi:return/reset
 function tobi:return/cooldown
 
-# Genjutsu (Slot 5)
-function tobi:genjutsu/effects
+# Slot 5: Genjutsu
 function tobi:genjutsu/detect
+function tobi:genjutsu/effects
 
-# Test Spiral (Slot 6) - CLEAN SYSTEM
+# Slot 6: Spiral Animation
 function tobi:test_spiral/main
-
-# NEW - Kamui Spiral Animation System
-function tobi:kamui/animation_tick
+# The render_spiral should be called inside your states or main spiral logic

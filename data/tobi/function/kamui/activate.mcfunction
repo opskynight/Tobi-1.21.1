@@ -1,19 +1,16 @@
-# Start withdraw animation (portal closes)
-function tobi:kamui/trigger_withdraw
-
-# Set active timer to 1 IMMEDIATELY (skip the delay for now)
-scoreboard players set @s tobi_kamui_active 1
-
-# Switch to spectator right away
+# Switch to spectator
 gamemode spectator @s
-
-# Reset charge timer
+scoreboard players set @s tobi_kamui_active 1
 scoreboard players set @s tobi_kamui_charge 0
 
-# Reset phasing
-scoreboard players set @s tobi_phase 0
-scoreboard players set @s tobi_underground 0
+# Initialize position for stillness detection
+execute store result score @s tobi_kamui_pos_x run data get entity @s Pos[0] 100
+execute store result score @s tobi_kamui_pos_y run data get entity @s Pos[1] 100
+execute store result score @s tobi_kamui_pos_z run data get entity @s Pos[2] 100
+scoreboard players set @s tobi_kamui_stillness 0
 
-# Message
-tellraw @s {"text":"[Kamui] Activated - 15 seconds of time and space travelling.","color":"dark_purple","bold":true}
+# Messages and effects
+tellraw @s {"text":"[Kamui] Dimension warp activated.","color":"dark_purple","bold":true}
+tellraw @s {"text":"→ Keep moving to explore. Stand still for 5 seconds to return.","color":"light_purple"}
 playsound minecraft:entity.enderman.teleport player @s ~ ~ ~ 1 0.5
+execute at @s run particle minecraft:portal ~ ~1 ~ 0.5 0.5 0.5 1 50 force

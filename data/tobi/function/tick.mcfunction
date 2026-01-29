@@ -13,7 +13,6 @@ function tobi:phasing/check_surface
 # Slot 1: Kamui Teleport
 function tobi:kamui/charge
 function tobi:kamui/detect_stillness
-# Ensure your return_countdown handles the scoreboard tobi:kamui_return_countdown
 
 # Slot 2: Time Barrier (Intangibility)
 function tobi:barrier/detect
@@ -40,4 +39,3 @@ function tobi:genjutsu/effects
 
 # Slot 6: Spiral Animation
 function tobi:test_spiral/main
-# The render_spiral should be called inside your states or main spiral logic

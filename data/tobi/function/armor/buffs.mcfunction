@@ -1,27 +1,37 @@
-# Apply passive buffs to players wearing full Tobi armor
+# ============================================
+# ATTRIBUTE-BASED ARMOR BUFFS (OPTIMIZED)
+# ============================================
+# This system applies permanent stat boosts via attributes (lag-free)
+# and only uses effects for Night Vision and Saturation
 
-# Night Vision (infinite)
-effect give @a[scores={tobi_has_armor=1}] minecraft:night_vision infinite 0 true
+# ============================================
+# APPLY ATTRIBUTES (ONCE when armor equipped)
+# ============================================
+execute as @a[scores={tobi_has_armor=1}] unless entity @s[tag=tobi_attributes_applied] run function tobi:armor/apply_attributes
 
-# Saturation (infinite)
-effect give @a[scores={tobi_has_armor=1}] minecraft:saturation infinite 0 true
+# ============================================
+# APPLY EFFECTS (ONCE when armor equipped)
+# ============================================
+execute as @a[scores={tobi_has_armor=1}] unless entity @s[tag=tobi_effects_applied] run effect give @s minecraft:night_vision infinite 0 true
+execute as @a[scores={tobi_has_armor=1}] unless entity @s[tag=tobi_effects_applied] run effect give @s minecraft:saturation infinite 0 true
+execute as @a[scores={tobi_has_armor=1}] unless entity @s[tag=tobi_effects_applied] run tag @s add tobi_effects_applied
 
-# Health Boost IV (+10 hearts)
-effect give @a[scores={tobi_has_armor=1}] minecraft:health_boost infinite 4 true
+# ============================================
+# REAPPLY ON DEATH (Effects lost on death)
+# ============================================
+execute as @a[scores={tobi_has_armor=1,tobi_death=1..}] run effect give @s minecraft:night_vision infinite 0 true
+execute as @a[scores={tobi_has_armor=1,tobi_death=1..}] run effect give @s minecraft:saturation infinite 0 true
+execute as @a[scores={tobi_death=1..}] run scoreboard players set @s tobi_death 0
+execute as @a[scores={tobi_death=1..}] run tag @s remove tobi_effects_applied
 
-# Strength (infinite)
-effect give @a[scores={tobi_has_armor=1}] minecraft:strength infinite 4 true
+# ============================================
+# REMOVE ATTRIBUTES (ONCE when armor removed)
+# ============================================
+execute as @a[scores={tobi_has_armor=0}] if entity @s[tag=tobi_attributes_applied] run function tobi:armor/remove_attributes
 
-# Speed (infinite)
-effect give @a[scores={tobi_has_armor=1}] minecraft:speed infinite 1 true
-
-# Jump_boost (infinite)
-effect give @a[scores={tobi_has_armor=1}] minecraft:jump_boost infinite 4 true
-
-# Clear effects when armor is removed
-execute as @a[scores={tobi_has_armor=0}] run effect clear @s minecraft:night_vision
-execute as @a[scores={tobi_has_armor=0}] run effect clear @s minecraft:saturation
-execute as @a[scores={tobi_has_armor=0}] run effect clear @s minecraft:health_boost
-execute as @a[scores={tobi_has_armor=0}] run effect clear @s minecraft:strength
-execute as @a[scores={tobi_has_armor=0}] run effect clear @s minecraft:speed
-execute as @a[scores={tobi_has_armor=0}] run effect clear @s minecraft:jump_boost
+# ============================================
+# REMOVE EFFECTS (ONCE when armor removed)
+# ============================================
+execute as @a[scores={tobi_has_armor=0}] if entity @s[tag=tobi_effects_applied] run effect clear @s minecraft:night_vision
+execute as @a[scores={tobi_has_armor=0}] if entity @s[tag=tobi_effects_applied] run effect clear @s minecraft:saturation
+execute as @a[scores={tobi_has_armor=0}] if entity @s[tag=tobi_effects_applied] run tag @s remove tobi_effects_applied

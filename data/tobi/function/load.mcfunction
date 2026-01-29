@@ -2,6 +2,9 @@
 scoreboard objectives add tobi_slot dummy
 scoreboard objectives add tobi_has_armor dummy
 
+# Death tracking for effect reapplication
+scoreboard objectives add tobi_death deathCount
+
 # Phasing (Slot 0)
 scoreboard objectives add tobi_phase dummy
 scoreboard objectives add tobi_underground dummy

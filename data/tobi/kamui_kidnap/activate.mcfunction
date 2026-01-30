@@ -1,9 +1,13 @@
+# Apply lingering effects (7 seconds) BEFORE teleporting
+execute as @e[tag=kamui_target] run effect give @s minecraft:blindness 7 255 true
+execute as @e[tag=kamui_target] run effect give @s minecraft:slowness 7 255 true
+
 # Particle and sound at each entity's location BEFORE teleporting
 execute as @e[tag=kamui_target] at @s run particle minecraft:explosion ~ ~1 ~ 0 0 0 0 1 force
 execute as @e[tag=kamui_target] at @s run playsound minecraft:entity.generic.explode player @a ~ ~ ~ 1 1
 
-# Teleport all tagged entities to Kamui dimension (Y=400)
-execute as @e[tag=kamui_target] at @s run tp @s ~ 400 ~
+# Teleport all tagged entities to Kamui dimension at coordinates 0 45 0
+execute as @e[tag=kamui_target] in kamui:void run tp @s 0 45 0
 
 # Tag them as kidnapped for tracking and persistence
 tag @e[tag=kamui_target] add tobi_kidnapped

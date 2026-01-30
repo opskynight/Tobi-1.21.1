@@ -1,4 +1,2 @@
-# Macro function to deal damage
-# Called with storage containing damage value
-
+# Macro function to deal exact percentage damage
 $damage @s $(damage) minecraft:magic

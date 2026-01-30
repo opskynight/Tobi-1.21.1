@@ -36,10 +36,17 @@ scoreboard objectives add tobi_return_charge dummy
 scoreboard objectives add tobi_entity_marked dummy
 scoreboard objectives add tobi_maintain_timer dummy
 
+# Genjutsu (Slot 5)
+scoreboard objectives add tobi_genjutsu_dmg dummy
+scoreboard objectives add tobi_genjutsu_temp dummy
+
 # Spiral Animation (Slot 6)
 scoreboard objectives add spiral_state dummy
 scoreboard objectives add spiral_scale dummy
 scoreboard objectives add spiral_timer dummy
 scoreboard objectives add spiral_rotation dummy
+
+# Set constant for division
+scoreboard players set #3 tobi_genjutsu_dmg 3
 
 tellraw @a {"text":"[Tobi] Datapack Loaded! All systems online.","color":"gold"}

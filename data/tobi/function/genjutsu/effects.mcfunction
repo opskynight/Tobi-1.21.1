@@ -7,8 +7,27 @@ execute as @a[scores={tobi_slot=5,tobi_has_armor=1}] unless predicate tobi:is_sn
 execute as @a[scores={tobi_slot=5,tobi_has_armor=1}] unless predicate tobi:is_sneaking at @s as @e[type=!player,type=!item,type=!experience_orb,distance=..10] run data merge entity @s {NoAI:1b}
 
 # TORTURE MODE (Sneaking) - 4x4 area directly in front
-# Position 2 blocks forward, then check 4x4 area (dx dy dz)
-execute as @a[scores={tobi_slot=5,tobi_has_armor=1},predicate=tobi:is_sneaking] at @s anchored eyes positioned ^ ^ ^2 run effect give @e[type=!player,type=!item,type=!experience_orb,dx=4,dy=4,dz=4] minecraft:wither 1 4 true
+# Tag entities in torture zone first
+execute as @a[scores={tobi_slot=5,tobi_has_armor=1},predicate=tobi:is_sneaking] at @s anchored eyes positioned ^ ^ ^2 run tag @e[type=!player,type=!item,type=!experience_orb,dx=4,dy=4,dz=4] add genjutsu_torture
+
+# Freeze them (remove AI)
+execute as @e[tag=genjutsu_torture] run data merge entity @s {NoAI:1b}
+
+# Apply blindness for effect
+execute as @e[tag=genjutsu_torture] run effect give @s minecraft:blindness 1 255 true
+
+# Damage calculation: Deal 1/3 of their max health
+# Step 1: Store their max health (multiply by 100 for precision)
+execute as @e[tag=genjutsu_torture] store result score @s tobi_genjutsu_dmg run attribute @s minecraft:max_health get 100
+
+# Step 2: Divide by 3 (get 1/3 of max health, still scaled by 100)
+execute as @e[tag=genjutsu_torture] run scoreboard players operation @s tobi_genjutsu_dmg /= #3 tobi_genjutsu_dmg
+
+# Step 3: Apply damage using simpler method
+execute as @e[tag=genjutsu_torture,scores={tobi_genjutsu_dmg=1..}] run function tobi:genjutsu/apply_damage
+
+# Remove tag after processing
+tag @e[tag=genjutsu_torture] remove genjutsu_torture
 
 # Particles for affected entities
 execute as @a[scores={tobi_slot=5,tobi_has_armor=1},predicate=tobi:is_sneaking] at @s anchored eyes positioned ^ ^ ^2 as @e[type=!player,type=!item,type=!experience_orb,dx=4,dy=4,dz=4] at @s run particle minecraft:dust{color:[1.0,0.0,0.0],scale:2.0} ~ ~1 ~ 0.6 1.0 0.6 0.1 20 force

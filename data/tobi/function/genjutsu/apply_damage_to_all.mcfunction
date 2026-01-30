@@ -1,0 +1,2 @@
+# Apply damage to all entities within 10 blocks that don't have cooldown
+execute as @e[type=!player,type=!item,type=!experience_orb,distance=..10] unless entity @s[tag=genjutsu_damaged] run function tobi:genjutsu/apply_damage

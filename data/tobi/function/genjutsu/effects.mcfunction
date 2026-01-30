@@ -8,7 +8,7 @@ execute as @a[scores={tobi_slot=5,tobi_has_armor=1}] unless predicate tobi:is_sn
 
 # TORTURE MODE (Sneaking) - SAME 10 BLOCK RANGE, deals 1/3 max HP damage
 # Only damage entities that DON'T have the damage cooldown tag
-execute as @a[scores={tobi_slot=5,tobi_has_armor=1},predicate=tobi:is_sneaking] at @s as @e[type=!player,type=!item,type=!experience_orb,distance=..10] unless entity @s[tag=genjutsu_damaged] run function tobi:genjutsu/apply_damage
+execute as @a[scores={tobi_slot=5,tobi_has_armor=1},predicate=tobi:is_sneaking] at @s run function tobi:genjutsu/apply_damage_to_all
 
 # CONTROL MODE PARTICLES: Light red particles (reduced count)
 execute as @a[scores={tobi_slot=5,tobi_has_armor=1}] unless predicate tobi:is_sneaking at @s as @e[type=!player,type=!item,type=!experience_orb,distance=..10] at @s run particle minecraft:dust{color:[1.0,0.2,0.2],scale:0.8} ~ ~1 ~ 0.3 0.5 0.3 0 2 force

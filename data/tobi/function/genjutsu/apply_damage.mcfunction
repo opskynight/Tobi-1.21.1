@@ -1,4 +1,3 @@
-# Apply 1/3 of max health as damage
 # Tag entity to prevent repeated damage
 tag @s add genjutsu_damaged
 
@@ -10,21 +9,27 @@ effect give @s minecraft:blindness 1 255 true
 effect give @s minecraft:slowness 1 255 true
 effect give @s minecraft:weakness 1 255 true
 
-# Store max health attribute and calculate 1/3
-execute store result score @s tobi_genjutsu_dmg run attribute @s minecraft:max_health get 100
+# Get CURRENT health and store it
+execute store result score @s tobi_genjutsu_dmg run data get entity @s Health 100
 
-# Divide by 3 to get 1/3 of max health (still scaled by 100)
+# Calculate 1/3 of current health to remove
 scoreboard players operation @s tobi_genjutsu_dmg /= #3 tobi_genjutsu_dmg
 
-# Convert back to proper damage value (divide by 100)
-execute store result storage tobi:genjutsu damage float 0.01 run scoreboard players get @s tobi_genjutsu_dmg
+# Get current health again
+execute store result score @s tobi_temp_health run data get entity @s Health 100
 
-# Apply damage using macro
-function tobi:genjutsu/deal_damage with storage tobi:genjutsu
+# Subtract the 1/3 damage
+scoreboard players operation @s tobi_temp_health -= @s tobi_genjutsu_dmg
 
-# Start cooldown timer (40 ticks = 2 seconds before can be damaged again)
+# Set new health (making sure it doesn't go below 1 HP = 100 in our scale)
+execute if score @s tobi_temp_health matches ..99 run scoreboard players set @s tobi_temp_health 100
+
+# Apply the new health value
+execute store result entity @s Health float 0.01 run scoreboard players get @s tobi_temp_health
+
+# Start cooldown timer
 scoreboard players set @s tobi_genjutsu_timer 40
 
-# Visual feedback for damaged entity
+# Visual feedback
 particle minecraft:dust{color:[1.0,0.0,0.0],scale:2.0} ~ ~1 ~ 0.5 1.0 0.5 0 15 force
 playsound minecraft:entity.player.hurt player @a ~ ~ ~ 0.5 0.5

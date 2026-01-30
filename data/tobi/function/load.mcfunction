@@ -50,5 +50,7 @@ scoreboard objectives add spiral_rotation dummy
 scoreboard players set #3 tobi_genjutsu_dmg 3
 scoreboard objectives add tobi_temp_health dummy
 scoreboard players set #100 tobi_genjutsu_dmg 100
+scoreboard players set #20 tobi_genjutsu_dmg 20
+
 
 tellraw @a {"text":"[Tobi] Datapack Loaded! All systems online.","color":"gold"}

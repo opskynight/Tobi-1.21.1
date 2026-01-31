@@ -26,3 +26,5 @@ attribute @s minecraft:generic.burning_time base set 0
 # Mark player as having attributes applied
 tag @s add tobi_attributes_applied
 
+# Feedback message
+tellraw @s {"text":"[Tobi] Armor attributes applied! (40 HP, no fall/fire damage, +2 step height)","color":"gold","bold":true}

@@ -1,5 +1,5 @@
 # ============================================
-# SHORT RANGE - DETECT (FIXED)
+# SHORT RANGE - DETECT (AI RESTORATION FIXED)
 # ============================================
 # Cleanup when switching modes or losing armor
 
@@ -8,7 +8,7 @@ execute as @a unless score @s tobi_offensive_mode matches 0 at @s as @e[tag=shor
 
 # Clear tags when mode changes
 execute as @a unless score @s tobi_offensive_mode matches 0 at @s run tag @e[tag=short_range_target,distance=..10] remove short_range_target
-execute as @a unless score @s tobi_offensive_mode matches 0 at @s run effect clear @e[tag=short_range_target,distance=..10] minecraft:glowing
+execute as @a unless score @s tobi_offensive_mode matches 0 at @s run effect clear @e[distance=..10] minecraft:glowing
 
 # Reset charge if player switches away from mode 0
 execute as @a unless score @s tobi_offensive_mode matches 0 run scoreboard players set @s tobi_short_range_charge 0
@@ -19,3 +19,6 @@ execute as @a unless score @s tobi_offensive_mode matches 0 run scoreboard playe
 # Restore AI when losing armor
 execute as @a[scores={tobi_has_armor=0}] at @s as @e[tag=short_range_target,distance=..10,nbt={NoAI:1b}] run data merge entity @s {NoAI:0b}
 execute as @a[scores={tobi_has_armor=0}] at @s run tag @e[tag=short_range_target,distance=..10] remove short_range_target
+
+# CRITICAL: Restore AI when player UNSNEAKS (this is what was missing!)
+execute as @a[scores={tobi_offensive_mode=0}] unless predicate tobi:is_sneaking at @s as @e[tag=short_range_target,distance=..10,nbt={NoAI:1b}] run data merge entity @s {NoAI:0b}

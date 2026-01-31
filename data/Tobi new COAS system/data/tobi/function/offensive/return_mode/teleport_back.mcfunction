@@ -1,8 +1,6 @@
 # ============================================
-# RETURN MODE TELEPORT BACK
+# RETURN MODE TELEPORT BACK (ROBUST AI RESTORATION!)
 # ============================================
-# Modified from return/teleport_back.mcfunction
-# Uses offensive_mode=2 instead of slot detection
 
 # CHARGE PHASE: Increment charge score while sneaking in mode 2 (NOT on cooldown)
 execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=2,tobi_return_cooldown=0},predicate=tobi:is_sneaking] run scoreboard players add @s tobi_return_charge 1
@@ -24,22 +22,7 @@ execute as @a[scores={tobi_offensive_mode=2,tobi_return_charge=20..29},predicate
 execute as @a[scores={tobi_offensive_mode=2,tobi_return_charge=30..39},predicate=tobi:is_sneaking] run title @s actionbar {"text":"▰▰▰▰ ALMOST READY ▰▰▰▰","color":"dark_aqua","bold":true}
 
 # ACTIVATION: When charge reaches 40 - Return all kidnapped entities
-# Step 1: Reset their scores and remove tag
-execute as @a[scores={tobi_offensive_mode=2,tobi_return_charge=40..},predicate=tobi:is_sneaking] run scoreboard players set @e[tag=tobi_kidnapped] tobi_entity_marked 0
-execute as @a[scores={tobi_offensive_mode=2,tobi_return_charge=40..},predicate=tobi:is_sneaking] run scoreboard players set @e[tag=tobi_kidnapped] tobi_maintain_timer 0
-
-# Step 2: Teleport them to player
-execute as @a[scores={tobi_offensive_mode=2,tobi_return_charge=40..},predicate=tobi:is_sneaking] at @s run tp @e[tag=tobi_kidnapped] @s
-
-# Step 3: Clear effects and tags
-execute as @a[scores={tobi_offensive_mode=2,tobi_return_charge=40..},predicate=tobi:is_sneaking] run effect clear @e[tag=tobi_kidnapped] minecraft:blindness
-execute as @a[scores={tobi_offensive_mode=2,tobi_return_charge=40..},predicate=tobi:is_sneaking] run tag @e[tag=tobi_kidnapped] remove tobi_kidnapped
-
-# Message to player
-execute as @a[scores={tobi_offensive_mode=2,tobi_return_charge=40..},predicate=tobi:is_sneaking] run tellraw @s {"text":"[Kamui] Entities returned from the void dimension!","color":"aqua","bold":true}
-
-# Start cooldown for the player
-execute as @a[scores={tobi_offensive_mode=2,tobi_return_charge=40..},predicate=tobi:is_sneaking] run scoreboard players set @s tobi_return_cooldown 1
+execute as @a[scores={tobi_offensive_mode=2,tobi_return_charge=40..},predicate=tobi:is_sneaking] run function tobi:offensive/return_mode/do_return
 
 # Reset charge after activation
 execute as @a[scores={tobi_return_charge=40..}] run scoreboard players set @s tobi_return_charge 0

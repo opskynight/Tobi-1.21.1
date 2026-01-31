@@ -1,13 +1,12 @@
 # ============================================
-# SHORT RANGE - CHARGE KIDNAP (COMPLETELY FIXED)
+# SHORT RANGE - CHARGE KIDNAP (SYNTAX FIXED!)
 # ============================================
 # Charge for 2 seconds (40 ticks), then kidnap nearby entities
 
 # Only charge if: mode 0, has armor, NOT on cooldown, sneaking
-# REMOVED the requirement for tagged entities to exist - they get tagged in tag_entities.mcfunction
 execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=0,tobi_has_armor=1,tobi_short_range_cooldown=0},predicate=tobi:is_sneaking] run scoreboard players add @s tobi_short_range_charge 1
 
-# Reset charge if stopped sneaking
+# Reset charge if stopped sneaking (FIXED SYNTAX ERROR HERE!)
 execute as @a[scores={tobi_short_range_charge=1..}] unless predicate tobi:is_sneaking run scoreboard players set @s tobi_short_range_charge 0
 
 # FREEZE entities by removing AI while charging (ONLY when sneaking AND charging)

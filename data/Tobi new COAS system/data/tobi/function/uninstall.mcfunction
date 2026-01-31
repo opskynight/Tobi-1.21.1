@@ -1,5 +1,5 @@
 # ============================================
-# TOBI DATAPACK - UNINSTALL (COAS SYSTEM) - FIXED
+# TOBI DATAPACK - UNINSTALL (AI RESTORATION IMPROVED)
 # ============================================
 
 # Remove all scoreboard objectives
@@ -46,6 +46,7 @@ scoreboard objectives remove tobi_kamui_return_countdown
 # Genjutsu
 scoreboard objectives remove tobi_genjutsu_dmg
 scoreboard objectives remove tobi_genjutsu_timer
+scoreboard objectives remove tobi_temp_health
 
 # Extra Features
 scoreboard objectives remove spiral_state
@@ -60,18 +61,24 @@ kill @e[type=marker,tag=kamui_spinner]
 gamemode survival @a[gamemode=spectator]
 effect clear @e
 
-# Restore AI for any frozen entities
+# CRITICAL: Restore AI for ANY frozen entities (in overworld AND void dimension)
 execute as @e[type=!player,type=!item,type=!experience_orb,nbt={NoAI:1b}] run data merge entity @s {NoAI:0b}
+execute in kamui:void as @e[type=!player,type=!item,type=!experience_orb,nbt={NoAI:1b}] run data merge entity @s {NoAI:0b}
 
-# Remove tags
+# Remove tags (in both dimensions)
 tag @e[tag=genjutsu_damaged] remove genjutsu_damaged
 tag @e[tag=tobi_kidnapped] remove tobi_kidnapped
 tag @e[tag=short_range_target] remove short_range_target
 tag @e[tag=kamui_target] remove kamui_target
+
+execute in kamui:void run tag @e[tag=genjutsu_damaged] remove genjutsu_damaged
+execute in kamui:void run tag @e[tag=tobi_kidnapped] remove tobi_kidnapped
+execute in kamui:void run tag @e[tag=short_range_target] remove short_range_target
+execute in kamui:void run tag @e[tag=kamui_target] remove kamui_target
 
 # Remove player tags
 tag @a remove tobi_attributes_applied
 tag @a remove tobi_effects_applied
 tag @a remove tobi_armor_notified
 
-tellraw @a {"text":"[Tobi] Datapack uninstalled successfully.","color":"red"}
+tellraw @a {"text":"[Tobi] Datapack uninstalled successfully. All AI restored.","color":"red"}

@@ -1,17 +1,19 @@
 # ============================================
-# RETURN MODE - MAIN
+# LONG RANGE MODE - MAIN
 # ============================================
-# Uses existing return system from Slot 4
-# Modified to use offensive_mode=2 instead of slot detection
+# Raycast targeting and kidnap entities
 
-# Detect mode changes
-function tobi:offensive/return_mode/detect
+# Raycast control (updates marker position)
+function tobi:offensive/long_range/raycast_control
 
-# Charge and teleport back
-function tobi:offensive/return_mode/teleport_back
+# Marker effects (glowing, particles)
+function tobi:kamui_kidnap/marker_effects
 
-# Reset after return
-function tobi:return/reset
+# Charge kidnap (when sneaking)
+function tobi:offensive/long_range/charge_kidnap
 
-# Cooldown display
-function tobi:offensive/return_mode/cooldown
+# Cooldown management
+function tobi:offensive/long_range/cooldown
+
+# Detect mode changes (cleanup)
+function tobi:offensive/long_range/detect

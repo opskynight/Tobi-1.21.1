@@ -1,17 +1,10 @@
 # ============================================
-# RETURN MODE - MAIN
+# SHORT RANGE MODE - MAIN
 # ============================================
-# Uses existing return system from Slot 4
-# Modified to use offensive_mode=2 instead of slot detection
+# Freeze entities within 3 blocks when sneaking
 
-# Detect mode changes
-function tobi:offensive/return_mode/detect
+# ACTIVATE: Freeze entities when sneaking
+execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=0,tobi_has_armor=1},predicate=tobi:is_sneaking] run function tobi:offensive/short_range/activate
 
-# Charge and teleport back
-function tobi:offensive/return_mode/teleport_back
-
-# Reset after return
-function tobi:return/reset
-
-# Cooldown display
-function tobi:offensive/return_mode/cooldown
+# DEACTIVATE: Restore AI when not sneaking
+execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=0}] unless predicate tobi:is_sneaking run function tobi:offensive/short_range/deactivate

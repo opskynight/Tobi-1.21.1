@@ -1,19 +1,18 @@
 # ============================================
 # REMOVE ATTRIBUTES WHEN TOBI ARMOR IS REMOVED
 # ============================================
-# This runs ONCE when the player removes the armor
 
-# Remove all Tobi attribute modifiers
-attribute @s minecraft:max_health modifier remove tobi:health
-attribute @s minecraft:attack_damage modifier remove tobi:strength
-attribute @s minecraft:movement_speed modifier remove tobi:speed
-attribute @s minecraft:jump_strength modifier remove tobi:jump
-attribute @s minecraft:fall_damage_multiplier modifier remove tobi:no_fall
-attribute @s minecraft:step_height modifier remove tobi:step
-attribute @s minecraft:burning_time modifier remove tobi:fire
+# Reset all attributes to vanilla defaults
+attribute @s minecraft:generic.max_health base set 20
+attribute @s minecraft:generic.attack_damage base set 1
+attribute @s minecraft:generic.movement_speed base set 0.1
+attribute @s minecraft:generic.jump_strength base set 0.42
+attribute @s minecraft:generic.fall_damage_multiplier base set 1
+attribute @s minecraft:generic.step_height base set 0.6
+attribute @s minecraft:generic.burning_time base set 1
 
-# Remove tag
+# Remove the tracking tag
 tag @s remove tobi_attributes_applied
 
 # Feedback message
-tellraw @s {"text":"[Tobi] Armor attributes removed.","color":"red"}
+tellraw @s {"text":"[Tobi] Armor attributes removed. (Back to 20 HP)","color":"red"}

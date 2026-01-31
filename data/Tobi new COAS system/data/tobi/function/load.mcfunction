@@ -1,5 +1,5 @@
 # ============================================
-# TOBI DATAPACK - LOAD (COAS SYSTEM)
+# TOBI DATAPACK - LOAD (COAS SYSTEM) - FIXED
 # ============================================
 
 # Core Logic
@@ -44,6 +44,9 @@ scoreboard objectives add tobi_return_charge dummy
 scoreboard objectives add tobi_entity_marked dummy
 scoreboard objectives add tobi_maintain_timer dummy
 
+# Temporary storage for counts/calculations
+scoreboard objectives add tobi_temp_x dummy
+
 # ============================================
 # DIMENSIONAL STYLE (Travel/Dimension/Genjutsu) - COMING SOON
 # ============================================
@@ -53,7 +56,6 @@ scoreboard objectives add tobi_kamui_active dummy
 scoreboard objectives add tobi_kamui_pos_x dummy
 scoreboard objectives add tobi_kamui_pos_y dummy
 scoreboard objectives add tobi_kamui_pos_z dummy
-scoreboard objectives add tobi_temp_x dummy
 scoreboard objectives add tobi_temp_y dummy
 scoreboard objectives add tobi_temp_z dummy
 scoreboard objectives add tobi_kamui_stillness dummy
@@ -71,5 +73,9 @@ scoreboard objectives add spiral_rotation dummy
 # Barrier Timer (keeping for legacy compatibility)
 scoreboard objectives add tobi_barrier_timer dummy
 
-tellraw @a {"text":"[Tobi] COAS System Loaded!","color":"gold","bold":true}
+# Genjutsu (for dimensional style)
+scoreboard objectives add tobi_genjutsu_dmg dummy
+scoreboard objectives add tobi_genjutsu_timer dummy
+
+tellraw @a {"text":"[Tobi] COAS System Loaded! (FIXED VERSION)","color":"gold","bold":true}
 tellraw @a {"text":"→ /function tobi:give_all (Get everything)","color":"yellow"}

@@ -1,5 +1,5 @@
 # ============================================
-# TOBI DATAPACK - TICK (COAS SYSTEM)
+# TOBI DATAPACK - TICK (COAS SYSTEM) - FIXED
 # ============================================
 
 # --- GLOBAL CHECKS ---
@@ -24,7 +24,18 @@ execute as @a[scores={tobi_defensive=1}] run function tobi:defensive/main
 # OFFENSIVE STYLE (COAS #2)
 # ============================================
 # Runs when player is holding Offensive COAS
-execute as @a[scores={tobi_offensive=1}] run function tobi:offensive/main
+
+# SHORT RANGE (Mode 0)
+execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=0}] run function tobi:offensive/short_range/main
+
+# LONG RANGE (Mode 1)
+execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=1}] run function tobi:offensive/long_range/main
+
+# RETURN (Mode 2)
+execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=2}] run function tobi:offensive/return_mode/main
+
+# General display (for all offensive modes)
+execute as @a[scores={tobi_offensive=1}] run function tobi:offensive/display
 
 # Mode switching (offhand swap detection)
 function tobi:offensive/mode_switch

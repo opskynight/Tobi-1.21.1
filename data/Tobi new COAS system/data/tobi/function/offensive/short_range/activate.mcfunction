@@ -1,24 +1,35 @@
 # ============================================
-# SHORT RANGE ACTIVATE
+# SHORT RANGE - ACTIVATE KIDNAP
 # ============================================
-# Freeze entities within 3 blocks (all directions)
-# Apply NoAI and blindness
+# Teleport all tagged entities to Kamui dimension
 
-# Tag entities in range (3 block radius sphere)
-execute at @s run tag @e[type=!player,type=!item,type=!experience_orb,type=!armor_stand,distance=..3,tag=!short_range_frozen] add short_range_frozen
+# Particle and sound at each entity's location BEFORE teleporting
+execute as @e[tag=short_range_target] at @s run particle minecraft:explosion ~ ~1 ~ 0 0 0 0 1 force
+execute as @e[tag=short_range_target] at @s run playsound minecraft:entity.generic.explode player @a ~ ~ ~ 1 1
 
-# Apply NoAI to freeze them
-execute as @e[tag=short_range_frozen,nbt={NoAI:0b}] run data merge entity @s {NoAI:1b}
+# Teleport all tagged entities to Kamui dimension at coordinates 0 45 0
+execute as @e[tag=short_range_target] in kamui:void run tp @s 0 45 0
 
-# Apply blindness effect (5 seconds)
-execute at @s run effect give @e[tag=short_range_frozen,distance=..3] minecraft:blindness 5 0 true
+# RESTORE AI after teleportation (entities can move in the void dimension)
+execute as @e[tag=short_range_target] run data merge entity @s {NoAI:0b}
 
-# Apply weakness effect
-execute at @s run effect give @e[tag=short_range_frozen,distance=..3] minecraft:weakness 5 255 true
+# Tag them as kidnapped for tracking and persistence
+tag @e[tag=short_range_target] add tobi_kidnapped
+execute as @e[tag=tobi_kidnapped] run data merge entity @s {PersistenceRequired:1b}
 
-# Visual feedback - purple particles around frozen entities
-execute as @e[tag=short_range_frozen] at @s run particle minecraft:dust{color:[0.5,0.0,0.8],scale:1.5} ~ ~1 ~ 0.3 0.5 0.3 0 3 force
-execute as @e[tag=short_range_frozen] at @s run particle minecraft:portal ~ ~0.5 ~ 0.2 0.3 0.2 0.1 2 force
+# Clear glowing effect
+effect clear @e[tag=short_range_target] minecraft:glowing
 
-# Sound feedback (quiet continuous hum)
-execute at @s run playsound minecraft:block.beacon.ambient player @s ~ ~ ~ 0.3 1.8
+# Remove temporary tags (but keep tobi_kidnapped)
+tag @e[tag=short_range_target] remove short_range_target
+
+# Success message and effects
+tellraw @s {"text":"[Kamui] Entities absorbed into the void dimension!","color":"dark_red","bold":true}
+playsound minecraft:entity.enderman.teleport player @s ~ ~ ~ 1 0.5
+execute at @s run particle minecraft:explosion ~ ~1 ~ 1 1 1 0 10 force
+
+# Start cooldown
+scoreboard players set @s tobi_short_range_cooldown 1
+
+# Reset charge
+scoreboard players set @s tobi_short_range_charge 0

@@ -27,10 +27,18 @@ scoreboard objectives add tobi_underground dummy
 # OFFENSIVE STYLE (Short/Long/Return)
 # ============================================
 scoreboard objectives add tobi_offensive_mode dummy "0=Short, 1=Long, 2=Return"
+
+# Short Range (Mode 0)
+scoreboard objectives add tobi_short_range_charge dummy "Short range charge timer"
+scoreboard objectives add tobi_short_range_cooldown dummy "Short range cooldown"
+
+# Long Range (Mode 1)
 scoreboard objectives add tobi_ray_distance dummy
 scoreboard objectives add tobi_ray_hit dummy
 scoreboard objectives add tobi_kamui_kidnap_charge dummy
 scoreboard objectives add tobi_kamui_kidnap_cooldown dummy
+
+# Return (Mode 2)
 scoreboard objectives add tobi_return_cooldown dummy
 scoreboard objectives add tobi_return_charge dummy
 scoreboard objectives add tobi_entity_marked dummy

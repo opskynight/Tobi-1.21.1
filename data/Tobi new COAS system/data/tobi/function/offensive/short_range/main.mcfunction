@@ -1,10 +1,16 @@
 # ============================================
 # SHORT RANGE MODE - MAIN
 # ============================================
-# Freeze entities within 3 blocks when sneaking
+# Tag nearby mobs, charge for 2s, then kidnap to Kamui
 
-# ACTIVATE: Freeze entities when sneaking
-execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=0,tobi_has_armor=1},predicate=tobi:is_sneaking] run function tobi:offensive/short_range/activate
+# Tag entities within 3 blocks
+function tobi:offensive/short_range/tag_entities
 
-# DEACTIVATE: Restore AI when not sneaking
-execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=0}] unless predicate tobi:is_sneaking run function tobi:offensive/short_range/deactivate
+# Charge system (2 seconds = 40 ticks)
+function tobi:offensive/short_range/charge_kidnap
+
+# Cooldown management
+function tobi:offensive/short_range/cooldown
+
+# Detect mode changes (cleanup)
+function tobi:offensive/short_range/detect

@@ -1,10 +1,7 @@
 # ============================================
-# SHORT RANGE MODE - MAIN (DEBUG VERSION)
+# SHORT RANGE MODE - MAIN (FIXED)
 # ============================================
 # Tag nearby mobs, charge for 2s, then kidnap to Kamui
-
-# DEBUG: Show when this runs
-title @s actionbar {"text":"[DEBUG] Short Range Main Running","color":"yellow"}
 
 # Tag entities within 3 blocks
 function tobi:offensive/short_range/tag_entities

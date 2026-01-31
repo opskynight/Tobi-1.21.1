@@ -1,5 +1,5 @@
 # ============================================
-# SHORT RANGE COOLDOWN
+# SHORT RANGE COOLDOWN (FIXED)
 # ============================================
 
 # Increment cooldown timer
@@ -12,5 +12,5 @@ execute as @a[scores={tobi_offensive_mode=0,tobi_short_range_cooldown=60..119}] 
 # Reset cooldown after 120 ticks
 execute as @a[scores={tobi_short_range_cooldown=120..}] run scoreboard players set @s tobi_short_range_cooldown 0
 
-# Ready notification (only show when not actively using)
-execute as @a[scores={tobi_offensive_mode=0,tobi_short_range_cooldown=0,tobi_has_armor=1}] unless predicate tobi:is_sneaking unless entity @s[scores={tobi_short_range_charge=1..}] run title @s actionbar {"text":"◈ OFFENSIVE: SHORT RANGE (3 blocks) ◈","color":"red","bold":true}
+# Ready notification (only show when not actively using and not charging)
+execute as @a[scores={tobi_offensive_mode=0,tobi_short_range_cooldown=0,tobi_short_range_charge=0,tobi_has_armor=1}] unless predicate tobi:is_sneaking run title @s actionbar {"text":"◈ SHORT RANGE READY (3 blocks) ◈","color":"red","bold":true}

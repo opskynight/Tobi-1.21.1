@@ -1,15 +1,14 @@
 # ============================================
-# TOBI DATAPACK - TICK (COAS SYSTEM) - FIXED
+# TOBI DATAPACK - TICK (COAS SYSTEM) - FIXED v3
 # ============================================
 
-# --- GLOBAL CHECKS ---
+# --- GLOBAL CHECKS (Always run first) ---
 function tobi:armor/detect
 function tobi:armor/buffs
 
 # ============================================
-# COAS DETECTION
+# COAS DETECTION (Must run before abilities)
 # ============================================
-# Detect which COAS the player is holding
 function tobi:coas/detect_defensive
 function tobi:coas/detect_offensive
 # function tobi:coas/detect_dimensional (coming later)
@@ -17,13 +16,11 @@ function tobi:coas/detect_offensive
 # ============================================
 # DEFENSIVE STYLE (COAS #1)
 # ============================================
-# Runs when player is holding Defensive COAS
 execute as @a[scores={tobi_defensive=1}] run function tobi:defensive/main
 
 # ============================================
 # OFFENSIVE STYLE (COAS #2)
 # ============================================
-# Runs when player is holding Offensive COAS
 
 # SHORT RANGE (Mode 0)
 execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=0}] run function tobi:offensive/short_range/main
@@ -37,7 +34,7 @@ execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=2}] run function tobi
 # General display (for all offensive modes)
 execute as @a[scores={tobi_offensive=1}] run function tobi:offensive/display
 
-# Mode switching (offhand swap detection)
+# IMPORTANT: Mode switching AFTER abilities to prevent state conflicts
 function tobi:offensive/mode_switch
 
 # ============================================
@@ -50,3 +47,11 @@ function tobi:offensive/mode_switch
 # ============================================
 # Spiral Animation (Slot 6 - keeping separate)
 function tobi:test_spiral/main
+
+# Kamui Travel (Slot 1 - keeping separate for now)
+function tobi:kamui/charge
+function tobi:kamui/detect_stillness
+
+# Genjutsu (Slot 5 - keeping separate for now)
+function tobi:genjutsu/detect
+function tobi:genjutsu/effects

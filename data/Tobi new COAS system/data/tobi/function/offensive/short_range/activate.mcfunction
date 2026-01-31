@@ -1,5 +1,5 @@
 # ============================================
-# SHORT RANGE - ACTIVATE KIDNAP
+# SHORT RANGE - ACTIVATE KIDNAP (FIXED)
 # ============================================
 # Teleport all tagged entities to Kamui dimension
 
@@ -14,12 +14,14 @@ execute as @e[tag=short_range_target] at @s run playsound minecraft:entity.gener
 tag @e[tag=short_range_target] add tobi_kidnapped
 execute as @e[tag=short_range_target] run data merge entity @s {PersistenceRequired:1b}
 
+# Apply blindness effect (will persist in void)
+execute as @e[tag=short_range_target] run effect give @s minecraft:blindness infinite 0 true
+
 # Teleport all tagged entities to Kamui dimension at coordinates 0 45 0
 execute as @e[tag=short_range_target] in kamui:void run tp @s 0 45 0
 
-# RESTORE AI after teleportation (entities can move in the void dimension)
-# Use 'in kamui:void' to ensure we're targeting the correct dimension
-execute in kamui:void as @e[tag=short_range_target] run data merge entity @s {NoAI:0b}
+# IMPORTANT: Keep AI disabled in the void dimension (entities should stay frozen)
+# Do NOT restore AI - they should remain frozen until returned
 
 # Clear glowing effect in the void dimension
 execute in kamui:void run effect clear @e[tag=short_range_target] minecraft:glowing

@@ -46,6 +46,9 @@ scoreboard objectives add tobi_maintain_timer dummy
 
 # Temporary storage for counts/calculations
 scoreboard objectives add tobi_temp_x dummy
+scoreboard objectives add tobi_temp_y dummy
+scoreboard objectives add tobi_temp_z dummy
+scoreboard objectives add tobi_temp_health dummy
 
 # ============================================
 # DIMENSIONAL STYLE (Travel/Dimension/Genjutsu) - COMING SOON
@@ -56,8 +59,6 @@ scoreboard objectives add tobi_kamui_active dummy
 scoreboard objectives add tobi_kamui_pos_x dummy
 scoreboard objectives add tobi_kamui_pos_y dummy
 scoreboard objectives add tobi_kamui_pos_z dummy
-scoreboard objectives add tobi_temp_y dummy
-scoreboard objectives add tobi_temp_z dummy
 scoreboard objectives add tobi_kamui_stillness dummy
 scoreboard objectives add tobi_kamui_return_countdown dummy
 
@@ -76,6 +77,11 @@ scoreboard objectives add tobi_barrier_timer dummy
 # Genjutsu (for dimensional style)
 scoreboard objectives add tobi_genjutsu_dmg dummy
 scoreboard objectives add tobi_genjutsu_timer dummy
+
+# Genjutsu constants
+scoreboard players set #3 tobi_genjutsu_dmg 3
+scoreboard players set #100 tobi_genjutsu_dmg 100
+scoreboard players set #20 tobi_genjutsu_dmg 20
 
 tellraw @a {"text":"[Tobi] COAS System Loaded! (FIXED VERSION)","color":"gold","bold":true}
 tellraw @a {"text":"→ /function tobi:give_all (Get everything)","color":"yellow"}

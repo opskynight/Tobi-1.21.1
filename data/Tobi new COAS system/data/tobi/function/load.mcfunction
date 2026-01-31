@@ -83,5 +83,8 @@ scoreboard players set #3 tobi_genjutsu_dmg 3
 scoreboard players set #100 tobi_genjutsu_dmg 100
 scoreboard players set #20 tobi_genjutsu_dmg 20
 
+# Initialize kamui_active to 0 for all players
+scoreboard players set @a tobi_kamui_active 0
+
 tellraw @a {"text":"[Tobi] COAS System Loaded! (FIXED VERSION)","color":"gold","bold":true}
 tellraw @a {"text":"→ /function tobi:give_all (Get everything)","color":"yellow"}

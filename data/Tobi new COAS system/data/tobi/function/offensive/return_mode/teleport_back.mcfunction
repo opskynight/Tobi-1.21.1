@@ -1,9 +1,11 @@
 # ============================================
-# RETURN MODE TELEPORT BACK (ROBUST AI RESTORATION!)
+# RETURN MODE TELEPORT BACK - FIXED
 # ============================================
+# Modified from return/teleport_back.mcfunction
+# Uses offensive_mode=2 instead of slot detection
 
 # CHARGE PHASE: Increment charge score while sneaking in mode 2 (NOT on cooldown)
-execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=2,tobi_return_cooldown=0},predicate=tobi:is_sneaking] run scoreboard players add @s tobi_return_charge 1
+execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=2,tobi_return_cooldown=0,tobi_has_armor=1},predicate=tobi:is_sneaking] run scoreboard players add @s tobi_return_charge 1
 
 # Reset charge if player stops sneaking or switches mode
 execute as @a[scores={tobi_offensive_mode=2}] unless predicate tobi:is_sneaking run scoreboard players set @s tobi_return_charge 0
@@ -22,7 +24,4 @@ execute as @a[scores={tobi_offensive_mode=2,tobi_return_charge=20..29},predicate
 execute as @a[scores={tobi_offensive_mode=2,tobi_return_charge=30..39},predicate=tobi:is_sneaking] run title @s actionbar {"text":"▰▰▰▰ ALMOST READY ▰▰▰▰","color":"dark_aqua","bold":true}
 
 # ACTIVATION: When charge reaches 40 - Return all kidnapped entities
-execute as @a[scores={tobi_offensive_mode=2,tobi_return_charge=40..},predicate=tobi:is_sneaking] run function tobi:offensive/return_mode/do_return
-
-# Reset charge after activation
-execute as @a[scores={tobi_return_charge=40..}] run scoreboard players set @s tobi_return_charge 0
+execute as @a[scores={tobi_offensive_mode=2,tobi_return_charge=40..},predicate=tobi:is_sneaking] run function tobi:offensive/return_mode/activate_return

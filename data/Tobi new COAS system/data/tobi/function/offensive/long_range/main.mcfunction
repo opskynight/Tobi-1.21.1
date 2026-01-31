@@ -6,8 +6,8 @@
 # Raycast control (updates marker position)
 function tobi:offensive/long_range/raycast_control
 
-# Marker effects (glowing, particles)
-function tobi:kamui_kidnap/marker_effects
+# Marker effects (glowing, particles, AI freezing)
+function tobi:offensive/long_range/marker_effects
 
 # Charge kidnap (when sneaking)
 function tobi:offensive/long_range/charge_kidnap

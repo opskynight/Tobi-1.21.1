@@ -1,7 +1,8 @@
 # ============================================
-# SHORT RANGE - ACTIVATE KIDNAP (COMPLETE AI FIX!)
+# SHORT RANGE - ACTIVATE KIDNAP - FIXED
 # ============================================
-# Teleport all tagged entities to Kamui dimension and FREEZE them
+# Teleport all tagged entities to Kamui dimension
+# ENSURES AI IS RESTORED AFTER TELEPORTATION
 
 # Count entities for feedback
 execute store result score @s tobi_temp_x if entity @e[tag=short_range_target]
@@ -14,18 +15,12 @@ execute as @e[tag=short_range_target] at @s run playsound minecraft:entity.gener
 tag @e[tag=short_range_target] add tobi_kidnapped
 execute as @e[tag=short_range_target] run data merge entity @s {PersistenceRequired:1b}
 
-# Apply blindness effect (will persist in void)
-execute as @e[tag=short_range_target] run effect give @s minecraft:blindness infinite 0 true
-
-# FIX #1: Ensure NoAI is set BEFORE teleporting
-execute as @e[tag=short_range_target] run data merge entity @s {NoAI:1b}
-
 # Teleport all tagged entities to Kamui dimension at coordinates 0 45 0
 execute as @e[tag=short_range_target] in kamui:void run tp @s 0 45 0
 
-# FIX #2: CRITICAL! Re-apply NoAI AFTER teleporting (in the void dimension context)
-# This ensures entities stay frozen even after dimensional transfer
-execute in kamui:void as @e[tag=tobi_kidnapped] run data merge entity @s {NoAI:1b}
+# CRITICAL FIX: RESTORE AI after teleportation
+# Run this in the void dimension to ensure it affects the right entities
+execute in kamui:void as @e[tag=tobi_kidnapped] run data merge entity @s {NoAI:0b}
 
 # Clear glowing effect in the void dimension
 execute in kamui:void run effect clear @e[tag=short_range_target] minecraft:glowing

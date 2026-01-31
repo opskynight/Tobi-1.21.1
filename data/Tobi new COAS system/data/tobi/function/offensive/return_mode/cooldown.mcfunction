@@ -1,5 +1,5 @@
 # ============================================
-# RETURN MODE COOLDOWN
+# RETURN MODE COOLDOWN - FIXED
 # ============================================
 # Modified from return/cooldown.mcfunction
 
@@ -13,5 +13,5 @@ execute as @a[scores={tobi_offensive_mode=2,tobi_return_cooldown=60..119}] run t
 # Reset cooldown after 120 ticks (6 seconds)
 execute as @a[scores={tobi_return_cooldown=120..}] run scoreboard players set @s tobi_return_cooldown 0
 
-# Ready notification
-execute as @a[scores={tobi_offensive_mode=2,tobi_return_cooldown=0}] run title @s actionbar {"text":"✦ RETURN READY ✦","color":"green","bold":true}
+# Ready notification - show when not charging
+execute as @a[scores={tobi_offensive_mode=2,tobi_return_cooldown=0,tobi_has_armor=1}] unless score @s tobi_return_charge matches 1.. run title @s actionbar {"text":"✦ RETURN READY - SNEAK TO RECALL ✦","color":"green","bold":true}

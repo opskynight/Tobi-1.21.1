@@ -1,21 +1,13 @@
 # ============================================
 # LONG RANGE CHARGE KIDNAP
 # ============================================
-# Modified from kamui_kidnap/charge_kidnap.mcfunction
-# Uses offensive_mode=1 instead of slot detection
-# NOW REMOVES AI WHILE CHARGING
+# Charge for 2 seconds while sneaking, then activate kidnap
 
-# Only charge if: offensive mode 1, has armor, NOT on cooldown, sneaking, marker exists
+# Only charge if: mode 1, has armor, NOT on cooldown, sneaking, marker exists
 execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=1,tobi_has_armor=1,tobi_kamui_kidnap_cooldown=0},predicate=tobi:is_sneaking] at @s if entity @e[type=armor_stand,tag=kamui_marker,distance=..25] run scoreboard players add @s tobi_kamui_kidnap_charge 1
 
 # Reset charge if stopped sneaking
 execute as @a[scores={tobi_kamui_kidnap_charge=1..}] unless predicate tobi:is_sneaking run scoreboard players set @s tobi_kamui_kidnap_charge 0
-
-# FREEZE entities by removing AI when player is SNEAKING on mode 1
-execute as @a[scores={tobi_offensive_mode=1,tobi_has_armor=1},predicate=tobi:is_sneaking] at @s as @e[tag=kamui_target,distance=..30] run data merge entity @s {NoAI:1b}
-
-# UNFREEZE entities (restore AI) when player is NOT sneaking
-execute as @a[scores={tobi_offensive_mode=1}] unless predicate tobi:is_sneaking at @s as @e[tag=kamui_target,distance=..30,nbt={NoAI:1b}] run data merge entity @s {NoAI:0b}
 
 # Continuous explosion sound while charging (every 5 ticks = 0.25s)
 execute as @a[scores={tobi_kamui_kidnap_charge=1..39}] if score @s tobi_kamui_kidnap_charge matches 5 at @s run playsound minecraft:entity.generic.explode player @s ~ ~ ~ 0.3 1.5
@@ -33,4 +25,4 @@ execute as @a[scores={tobi_kamui_kidnap_charge=20..29}] run title @s actionbar {
 execute as @a[scores={tobi_kamui_kidnap_charge=30..39}] run title @s actionbar {"text":"▰▰▰▰ READY ▰▰▰▰","color":"light_purple","bold":true}
 
 # ACTIVATION at 40 ticks (2 seconds)
-execute as @a[scores={tobi_kamui_kidnap_charge=40..}] run function tobi:kamui_kidnap/activate
+execute as @a[scores={tobi_kamui_kidnap_charge=40..}] run function tobi:offensive/long_range/activate

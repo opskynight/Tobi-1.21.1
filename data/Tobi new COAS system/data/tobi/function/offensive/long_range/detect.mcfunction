@@ -1,8 +1,7 @@
 # ============================================
 # LONG RANGE DETECT
 # ============================================
-# Modified from kamui_kidnap/detect.mcfunction
-# Uses offensive_mode=1 instead of slot detection
+# Cleanup when switching modes or losing armor
 
 # Restore AI when player stops sneaking (but still in mode 1)
 execute as @a[scores={tobi_offensive_mode=1}] unless predicate tobi:is_sneaking at @s as @e[tag=kamui_target,distance=..30,nbt={NoAI:1b}] run data merge entity @s {NoAI:0b}

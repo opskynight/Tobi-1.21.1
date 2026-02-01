@@ -1,5 +1,5 @@
 # ============================================
-# TOBI DATAPACK - LOAD (COAS SYSTEM) - FIXED
+# TOBI DATAPACK - LOAD (COAS SYSTEM) - COMPLETE
 # ============================================
 
 # Core Logic
@@ -46,26 +46,43 @@ scoreboard objectives add tobi_maintain_timer dummy
 
 # Temporary storage for counts/calculations
 scoreboard objectives add tobi_temp_x dummy
-scoreboard objectives add tobi_temp_y dummy
-scoreboard objectives add tobi_temp_z dummy
 scoreboard objectives add tobi_temp_health dummy
 
 # ============================================
-# DIMENSIONAL STYLE (Travel/Dimension/Genjutsu) - COMING SOON
+# DIMENSIONAL STYLE (Travel/Dimension/Genjutsu)
 # ============================================
 scoreboard objectives add tobi_dimensional_mode dummy "0=Travel, 1=Dimension, 2=Genjutsu"
-scoreboard objectives add tobi_kamui_charge dummy
-scoreboard objectives add tobi_kamui_active dummy
-scoreboard objectives add tobi_kamui_pos_x dummy
-scoreboard objectives add tobi_kamui_pos_y dummy
-scoreboard objectives add tobi_kamui_pos_z dummy
-scoreboard objectives add tobi_kamui_stillness dummy
-scoreboard objectives add tobi_kamui_return_countdown dummy
+
+# Travel Mode (Mode 0)
+scoreboard objectives add tobi_kamui_charge dummy "Kamui travel charge"
+scoreboard objectives add tobi_kamui_active dummy "Kamui travel active"
+scoreboard objectives add tobi_kamui_pos_x dummy "Kamui position X"
+scoreboard objectives add tobi_kamui_pos_y dummy "Kamui position Y"
+scoreboard objectives add tobi_kamui_pos_z dummy "Kamui position Z"
+scoreboard objectives add tobi_kamui_stillness dummy "Kamui stillness timer"
+scoreboard objectives add tobi_temp_y dummy "Temp Y storage"
+scoreboard objectives add tobi_temp_z dummy "Temp Z storage"
+
+# Dimension Mode (Mode 1)
+scoreboard objectives add tobi_dimension_charge dummy "Dimension warp charge"
+scoreboard objectives add tobi_return_x dummy "Return X coordinate"
+scoreboard objectives add tobi_return_y dummy "Return Y coordinate"
+scoreboard objectives add tobi_return_z dummy "Return Z coordinate"
+scoreboard objectives add tobi_return_dim dummy "Return dimension ID"
+
+# Genjutsu Mode (Mode 2)
+scoreboard objectives add tobi_genjutsu_dmg dummy "Genjutsu damage calc"
+scoreboard objectives add tobi_genjutsu_timer dummy "Genjutsu damage cooldown"
+
+# Set constants for genjutsu
+scoreboard players set #3 tobi_genjutsu_dmg 3
+scoreboard players set #100 tobi_genjutsu_dmg 100
+scoreboard players set #20 tobi_genjutsu_dmg 20
 
 # ============================================
-# EXTRA FEATURES
+# EXTRA FEATURES (Legacy)
 # ============================================
-# Spiral Animation (Slot 6 - keeping this separate)
+# Spiral Animation (Slot 6 - keeping separate)
 scoreboard objectives add spiral_state dummy
 scoreboard objectives add spiral_scale dummy
 scoreboard objectives add spiral_timer dummy
@@ -74,17 +91,6 @@ scoreboard objectives add spiral_rotation dummy
 # Barrier Timer (keeping for legacy compatibility)
 scoreboard objectives add tobi_barrier_timer dummy
 
-# Genjutsu (for dimensional style)
-scoreboard objectives add tobi_genjutsu_dmg dummy
-scoreboard objectives add tobi_genjutsu_timer dummy
-
-# Genjutsu constants
-scoreboard players set #3 tobi_genjutsu_dmg 3
-scoreboard players set #100 tobi_genjutsu_dmg 100
-scoreboard players set #20 tobi_genjutsu_dmg 20
-
-# Initialize kamui_active to 0 for all players
-scoreboard players set @a tobi_kamui_active 0
-
-tellraw @a {"text":"[Tobi] COAS System Loaded! (FIXED VERSION)","color":"gold","bold":true}
+tellraw @a {"text":"[Tobi] COAS System Loaded! (COMPLETE - All 3 COAS)","color":"gold","bold":true}
 tellraw @a {"text":"→ /function tobi:give_all (Get everything)","color":"yellow"}
+tellraw @a {"text":"→ Defensive, Offensive, AND Dimensional ready!","color":"green"}

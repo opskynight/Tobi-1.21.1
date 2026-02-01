@@ -1,17 +1,22 @@
 # ============================================
-# KAMUI DIMENSION - ACTIVATE WARP (TO VOID)
+# KAMUI DIMENSION - ACTIVATE WARP (TO VOID) - FIXED
 # ============================================
 # Store current position and teleport to kamui:void
 
-# Store current dimension
-execute in minecraft:overworld if entity @s[distance=0..] run scoreboard players set @s tobi_return_dim 0
-execute in minecraft:the_nether if entity @s[distance=0..] run scoreboard players set @s tobi_return_dim -1
-execute in minecraft:the_end if entity @s[distance=0..] run scoreboard players set @s tobi_return_dim 1
+# Store current dimension - FIXED METHOD
+# Check which dimension player is currently in
+execute if dimension minecraft:overworld run scoreboard players set @s tobi_return_dim 0
+execute if dimension minecraft:the_nether run scoreboard players set @s tobi_return_dim -1
+execute if dimension minecraft:the_end run scoreboard players set @s tobi_return_dim 1
+execute if dimension kamui:void run scoreboard players set @s tobi_return_dim 2
 
 # Store current coordinates (scaled by 100 for precision)
 execute store result score @s tobi_return_x run data get entity @s Pos[0] 100
 execute store result score @s tobi_return_y run data get entity @s Pos[1] 100
 execute store result score @s tobi_return_z run data get entity @s Pos[2] 100
+
+# Debug message to confirm what was saved
+tellraw @s [{"text":"[DEBUG] Saved: Dim=","color":"gray"},{"score":{"name":"@s","objective":"tobi_return_dim"},"color":"gold"},{"text":" X=","color":"gray"},{"score":{"name":"@s","objective":"tobi_return_x"},"color":"gold"},{"text":" Y=","color":"gray"},{"score":{"name":"@s","objective":"tobi_return_y"},"color":"gold"},{"text":" Z=","color":"gray"},{"score":{"name":"@s","objective":"tobi_return_z"},"color":"gold"}]
 
 # Teleport to kamui:void at 0 45 0
 execute in kamui:void run tp @s 0 45 0

@@ -1,8 +1,7 @@
 # ============================================
-# SHORT RANGE - ACTIVATE KIDNAP - FIXED
+# SHORT RANGE - ACTIVATE KIDNAP - FIXED AI RESTORATION
 # ============================================
-# Teleport all tagged entities to Kamui dimension
-# ENSURES AI IS RESTORED AFTER TELEPORTATION
+# Ensures AI is restored AFTER teleportation to Kamui void
 
 # Count entities for feedback
 execute store result score @s tobi_temp_x if entity @e[tag=short_range_target]
@@ -11,16 +10,15 @@ execute store result score @s tobi_temp_x if entity @e[tag=short_range_target]
 execute as @e[tag=short_range_target] at @s run particle minecraft:explosion ~ ~1 ~ 0 0 0 0 1 force
 execute as @e[tag=short_range_target] at @s run playsound minecraft:entity.generic.explode player @a ~ ~ ~ 1 1
 
-# Tag them as kidnapped BEFORE teleporting (this is critical!)
+# Tag them as kidnapped BEFORE teleporting
 tag @e[tag=short_range_target] add tobi_kidnapped
 execute as @e[tag=short_range_target] run data merge entity @s {PersistenceRequired:1b}
 
 # Teleport all tagged entities to Kamui dimension at coordinates 0 45 0
 execute as @e[tag=short_range_target] in kamui:void run tp @s 0 45 0
 
-# CRITICAL FIX: RESTORE AI after teleportation
-# Run this in the void dimension to ensure it affects the right entities
-execute in kamui:void as @e[tag=tobi_kidnapped] run data merge entity @s {NoAI:0b}
+# CRITICAL FIX: Wait 1 tick, then restore AI in the void dimension
+schedule function tobi:offensive/short_range/restore_ai_delayed 1t
 
 # Clear glowing effect in the void dimension
 execute in kamui:void run effect clear @e[tag=short_range_target] minecraft:glowing

@@ -1,8 +1,7 @@
 # ============================================
-# LONG RANGE ACTIVATE
+# LONG RANGE ACTIVATE - FIXED AI RESTORATION
 # ============================================
-# Teleport all tagged entities to Kamui void dimension
-# Entities should be able to MOVE in the void
+# Ensures AI is restored AFTER teleportation to Kamui void
 
 # Count entities for feedback
 execute store result score @s tobi_temp_x if entity @e[tag=kamui_target]
@@ -18,10 +17,10 @@ execute as @e[tag=kamui_target] run data merge entity @s {PersistenceRequired:1b
 # Teleport all tagged entities to Kamui dimension at coordinates 0 45 0
 execute as @e[tag=kamui_target] in kamui:void run tp @s 0 45 0
 
-# CRITICAL: RESTORE AI after teleportation (entities can move in void)
-execute in kamui:void as @e[tag=tobi_kidnapped] run data merge entity @s {NoAI:0b}
+# CRITICAL FIX: Wait 1 tick, then restore AI in the void dimension
+schedule function tobi:offensive/long_range/restore_ai_delayed 1t
 
-# Clear glowing effect
+# Clear glowing effect in the void dimension
 execute in kamui:void run effect clear @e[tag=kamui_target] minecraft:glowing
 
 # Remove temporary tag (but keep tobi_kidnapped)

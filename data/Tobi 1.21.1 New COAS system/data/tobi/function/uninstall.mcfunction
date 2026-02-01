@@ -77,6 +77,6 @@ tag @a remove tobi_attributes_applied
 tag @a remove tobi_effects_applied
 tag @a remove tobi_armor_notified
 tag @a remove in_kamui_void
-tag @a remove coas_name_updated
+tag @a remove in_void_mode
 
 tellraw @a {"text":"[Tobi] Complete COAS System uninstalled successfully.","color":"red"}

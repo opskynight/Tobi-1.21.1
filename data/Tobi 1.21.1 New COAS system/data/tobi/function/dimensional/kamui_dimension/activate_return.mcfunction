@@ -1,5 +1,5 @@
 # ============================================
-# KAMUI DIMENSION - ACTIVATE RETURN (FROM VOID) - FIXED
+# KAMUI DIMENSION - ACTIVATE RETURN (FROM VOID)
 # ============================================
 # Return to stored coordinates in the correct dimension
 
@@ -31,3 +31,13 @@ scoreboard players set @s tobi_dimension_charge 0
 tellraw @s {"text":"[Kamui Dimension] Returned to original location!","color":"green","bold":true}
 playsound minecraft:entity.enderman.teleport player @s ~ ~ ~ 1 2
 execute at @s run particle minecraft:portal ~ ~1 ~ 1 1 1 1 100 force
+
+# IMMEDIATELY update COAS name back to "Dimension" after returning
+clear @s carrot_on_a_stick[custom_data~{tobi_dimensional:1b,dimensional_mode:1}]
+give @s carrot_on_a_stick[unbreakable={},custom_name='{"text":"Kamui Dimension","color":"dark_purple","bold":true,"italic":false}',lore=['{"text":"Tobi\'s dimensional abilities","color":"gray","italic":false}','{"text":"","color":"gray","italic":false}','{"text":"SWAP TO OFFHAND: Change Mode","color":"gold","italic":false}','{"text":"→ Travel → Dimension → Genjutsu","color":"yellow","italic":false}','{"text":"","color":"gray","italic":false}','{"text":"DIMENSION MODE:","color":"dark_purple","italic":false}','{"text":"→ SNEAK 5s: Warp to Kamui void","color":"light_purple","italic":false}','{"text":"→ Stores your current location","color":"light_purple","italic":false}','{"text":"→ In void: Name changes to \'Return\'","color":"light_purple","italic":false}'],custom_model_data=3,custom_data={tobi_dimensional:1b,dimensional_mode:1}] 1
+
+# Remove void mode tag
+tag @s remove in_void_mode
+
+# Feedback
+tellraw @s {"text":"[Kamui] COAS updated to Dimension mode.","color":"dark_purple"}

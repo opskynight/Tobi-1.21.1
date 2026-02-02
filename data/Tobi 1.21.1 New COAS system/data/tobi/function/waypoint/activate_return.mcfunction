@@ -1,14 +1,19 @@
 # ============================================
-# KAMUI WAYPOINT - ACTIVATE RETURN
+# KAMUI WAYPOINT - ACTIVATE RETURN (FIXED)
 # ============================================
 # Return to stored waypoint location
 
 # Get player's UUID
 data modify storage tobi:temp uuid set from entity @s UUID
 
-# Find and load their stored location
-# This is a simplified approach - in practice you'd search the array
+# Debug: Show what's in storage
+tellraw @s [{"text":"[DEBUG] Storage contents: ","color":"yellow"},{"nbt":"waypoint.locations[-1]","storage":"tobi:"}]
+
+# CRITICAL FIX: Copy the stored location data to temp for macro use
 data modify storage tobi:temp return_data set from storage tobi:waypoint locations[-1]
+
+# Debug: Show what we're about to use
+tellraw @s [{"text":"[DEBUG] Using return_data: ","color":"aqua"},{"nbt":"temp.return_data","storage":"tobi:"}]
 
 # Teleport using macro function
 function tobi:waypoint/teleport_to_stored with storage tobi:temp return_data

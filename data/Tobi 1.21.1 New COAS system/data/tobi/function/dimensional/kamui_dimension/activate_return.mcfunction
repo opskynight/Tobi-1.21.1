@@ -1,10 +1,10 @@
 # ============================================
-# KAMUI DIMENSION - ACTIVATE RETURN (FROM VOID)
+# KAMUI DIMENSION - ACTIVATE RETURN (FIXED)
 # ============================================
 # Return to stored coordinates in the correct dimension
 
 # Debug message showing what we're returning to
-tellraw @s [{"text":"[DEBUG] Returning to: Dim=","color":"gray"},{"score":{"name":"@s","objective":"tobi_return_dim"},"color":"gold"},{"text"," Coords scaled by 100","color":"gray"}]
+tellraw @s [{"text":"[DEBUG] Returning to: Dim=","color":"gray"},{"score":{"name":"@s","objective":"tobi_return_dim"},"color":"gold"},{"text":" Coords (scaled): X=","color":"gray"},{"score":{"name":"@s","objective":"tobi_return_x"},"color":"gold"},{"text":" Y=","color":"gray"},{"score":{"name":"@s","objective":"tobi_return_y"},"color":"gold"},{"text":" Z=","color":"gray"},{"score":{"name":"@s","objective":"tobi_return_z"},"color":"gold"}]
 
 # Convert stored coordinates back to world coordinates (divide by 100)
 execute store result storage tobi:temp x int 0.01 run scoreboard players get @s tobi_return_x
@@ -21,8 +21,9 @@ execute if score @s tobi_return_dim matches -1 in minecraft:the_nether run funct
 execute if score @s tobi_return_dim matches 1 run tellraw @s {"text":"[DEBUG] Teleporting to End","color":"light_purple"}
 execute if score @s tobi_return_dim matches 1 in minecraft:the_end run function tobi:dimensional/kamui_dimension/teleport_coords with storage tobi:temp
 
-execute if score @s tobi_return_dim matches 2 run tellraw @s {"text":"[DEBUG] Teleporting to Kamui Void","color":"dark_purple"}
-execute if score @s tobi_return_dim matches 2 in kamui:void run function tobi:dimensional/kamui_dimension/teleport_coords with storage tobi:temp
+# If dimension ID is invalid or not set, teleport to overworld spawn as failsafe
+execute unless score @s tobi_return_dim matches -1..2 run tellraw @s {"text":"[ERROR] Invalid return dimension! Teleporting to overworld spawn.","color":"red"}
+execute unless score @s tobi_return_dim matches -1..2 in minecraft:overworld run tp @s ~ 100 ~
 
 # Reset charge
 scoreboard players set @s tobi_dimension_charge 0

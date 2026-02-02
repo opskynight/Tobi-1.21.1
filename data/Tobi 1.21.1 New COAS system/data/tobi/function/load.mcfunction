@@ -1,5 +1,5 @@
 # ============================================
-# TOBI DATAPACK - LOAD (COAS SYSTEM) - COMPLETE
+# TOBI DATAPACK - LOAD (COAS SYSTEM) - FIXED
 # ============================================
 
 # Core Logic
@@ -91,6 +91,45 @@ scoreboard objectives add spiral_rotation dummy
 # Barrier Timer (keeping for legacy compatibility)
 scoreboard objectives add tobi_barrier_timer dummy
 
+# ============================================
+# CRITICAL FIX: INITIALIZE ALL PLAYER SCORES TO 0
+# ============================================
+# This prevents "undefined score" issues when players first join
+
+# Core scores
+execute as @a unless score @s tobi_has_armor = @s tobi_has_armor run scoreboard players set @s tobi_has_armor 0
+execute as @a unless score @s tobi_defensive = @s tobi_defensive run scoreboard players set @s tobi_defensive 0
+execute as @a unless score @s tobi_offensive = @s tobi_offensive run scoreboard players set @s tobi_offensive 0
+execute as @a unless score @s tobi_dimensional = @s tobi_dimensional run scoreboard players set @s tobi_dimensional 0
+
+# Defensive scores
+execute as @a unless score @s tobi_phase = @s tobi_phase run scoreboard players set @s tobi_phase 0
+execute as @a unless score @s tobi_underground = @s tobi_underground run scoreboard players set @s tobi_underground 0
+
+# Offensive scores
+execute as @a unless score @s tobi_offensive_mode = @s tobi_offensive_mode run scoreboard players set @s tobi_offensive_mode 0
+execute as @a unless score @s tobi_short_range_charge = @s tobi_short_range_charge run scoreboard players set @s tobi_short_range_charge 0
+execute as @a unless score @s tobi_short_range_cooldown = @s tobi_short_range_cooldown run scoreboard players set @s tobi_short_range_cooldown 0
+execute as @a unless score @s tobi_ray_distance = @s tobi_ray_distance run scoreboard players set @s tobi_ray_distance 0
+execute as @a unless score @s tobi_kamui_kidnap_charge = @s tobi_kamui_kidnap_charge run scoreboard players set @s tobi_kamui_kidnap_charge 0
+execute as @a unless score @s tobi_kamui_kidnap_cooldown = @s tobi_kamui_kidnap_cooldown run scoreboard players set @s tobi_kamui_kidnap_cooldown 0
+execute as @a unless score @s tobi_return_cooldown = @s tobi_return_cooldown run scoreboard players set @s tobi_return_cooldown 0
+execute as @a unless score @s tobi_return_charge = @s tobi_return_charge run scoreboard players set @s tobi_return_charge 0
+
+# Dimensional scores (CRITICAL FOR PHASING!)
+execute as @a unless score @s tobi_dimensional_mode = @s tobi_dimensional_mode run scoreboard players set @s tobi_dimensional_mode 0
+execute as @a unless score @s tobi_kamui_charge = @s tobi_kamui_charge run scoreboard players set @s tobi_kamui_charge 0
+execute as @a unless score @s tobi_kamui_active = @s tobi_kamui_active run scoreboard players set @s tobi_kamui_active 0
+execute as @a unless score @s tobi_kamui_stillness = @s tobi_kamui_stillness run scoreboard players set @s tobi_kamui_stillness 0
+execute as @a unless score @s tobi_dimension_charge = @s tobi_dimension_charge run scoreboard players set @s tobi_dimension_charge 0
+
+# Spiral scores
+execute as @a unless score @s spiral_state = @s spiral_state run scoreboard players set @s spiral_state 0
+execute as @a unless score @s spiral_scale = @s spiral_scale run scoreboard players set @s spiral_scale 0
+execute as @a unless score @s spiral_timer = @s spiral_timer run scoreboard players set @s spiral_timer 0
+execute as @a unless score @s spiral_rotation = @s spiral_rotation run scoreboard players set @s spiral_rotation 0
+
 tellraw @a {"text":"[Tobi] COAS System Loaded! (COMPLETE - All 3 COAS)","color":"gold","bold":true}
 tellraw @a {"text":"→ /function tobi:give_all (Get everything)","color":"yellow"}
 tellraw @a {"text":"→ Defensive, Offensive, AND Dimensional ready!","color":"green"}
+tellraw @a {"text":"→ All player scores initialized to 0","color":"gray"}

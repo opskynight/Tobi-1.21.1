@@ -1,5 +1,5 @@
 # ============================================
-# KAMUI DIMENSION - CHARGE (DEBUG VERSION)
+# KAMUI DIMENSION - CHARGE (FIXED VERSION)
 # ============================================
 # Charge for 5 seconds (100 ticks) to warp to/from void
 
@@ -28,11 +28,15 @@ execute as @a[scores={tobi_dimensional=1,tobi_dimensional_mode=1,tobi_dimension_
 # DEBUG: Announce when reaching 100
 execute as @a[scores={tobi_dimension_charge=100}] run tellraw @s {"text":"[DEBUG] 100 ticks reached! Attempting teleport...","color":"red","bold":true}
 
+# ============================================
+# CRITICAL FIX: Use tag=!in_void_mode instead of "unless entity"
+# ============================================
 # On 100th tick (5 seconds), activate appropriate function
-# If in void mode → return
-execute as @a[scores={tobi_dimension_charge=100..},tag=in_void_mode] run tellraw @s {"text":"[DEBUG] Calling activate_return","color":"gold"}
+
+# If in void mode → return home
+execute as @a[scores={tobi_dimension_charge=100..},tag=in_void_mode] run tellraw @s {"text":"[DEBUG] You ARE in void mode - calling activate_return","color":"gold"}
 execute as @a[scores={tobi_dimension_charge=100..},tag=in_void_mode] run function tobi:dimensional/kamui_dimension/activate_return
 
-# If not in void mode → warp to void
-execute as @a[scores={tobi_dimension_charge=100..}] unless entity @s[tag=in_void_mode] run tellraw @s {"text":"[DEBUG] Calling activate_warp","color":"gold"}
-execute as @a[scores={tobi_dimension_charge=100..}] unless entity @s[tag=in_void_mode] run function tobi:dimensional/kamui_dimension/activate_warp
+# If NOT in void mode → warp to void
+execute as @a[scores={tobi_dimension_charge=100..},tag=!in_void_mode] run tellraw @s {"text":"[DEBUG] You are NOT in void mode - calling activate_warp","color":"gold"}
+execute as @a[scores={tobi_dimension_charge=100..},tag=!in_void_mode] run function tobi:dimensional/kamui_dimension/activate_warp

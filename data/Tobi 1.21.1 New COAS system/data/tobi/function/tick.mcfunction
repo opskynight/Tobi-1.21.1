@@ -1,6 +1,13 @@
 # ============================================
-# TOBI DATAPACK - TICK (COAS SYSTEM) - COMPLETE
+# TOBI DATAPACK - TICK (COAS SYSTEM) - FIXED
 # ============================================
+
+# ============================================
+# PLAYER INITIALIZATION (CRITICAL FIX!)
+# ============================================
+# Run initialization for any player who doesn't have scores set
+# This prevents the "undefined score" bug on first join
+execute as @a unless score @s tobi_kamui_active = @s tobi_kamui_active run function tobi:player_join
 
 # --- GLOBAL CHECKS ---
 function tobi:armor/detect

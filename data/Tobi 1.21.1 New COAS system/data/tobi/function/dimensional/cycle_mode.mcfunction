@@ -1,8 +1,9 @@
 # ============================================
-# CYCLE DIMENSIONAL MODE
+# CYCLE DIMENSIONAL MODE - FIXED
 # ============================================
 # Changes the COAS item to the next mode
 # Travel (0) → Dimension (1) → Genjutsu (2) → Travel (0)
+# CRITICAL FIX: Preserves void mode state when switching
 
 # Mark that we've processed this swap
 scoreboard players set @s tobi_offhand_swap 1
@@ -11,7 +12,13 @@ scoreboard players set @s tobi_offhand_swap 1
 # TRAVEL (0) → DIMENSION (1)
 # ============================================
 execute if score @s tobi_dimensional_mode matches 0 run clear @s carrot_on_a_stick[custom_data~{tobi_dimensional:1b}]
-execute if score @s tobi_dimensional_mode matches 0 run give @s carrot_on_a_stick[unbreakable={},custom_name='{"text":"Kamui Dimension","color":"dark_purple","bold":true,"italic":false}',lore=['{"text":"Tobi\'s dimensional abilities","color":"gray","italic":false}','{"text":"","color":"gray","italic":false}','{"text":"SWAP TO OFFHAND: Change Mode","color":"gold","italic":false}','{"text":"→ Travel → Dimension → Genjutsu","color":"yellow","italic":false}','{"text":"","color":"gray","italic":false}','{"text":"DIMENSION MODE:","color":"dark_purple","italic":false}','{"text":"→ SNEAK 5s: Warp to Kamui void","color":"light_purple","italic":false}','{"text":"→ In void: Name changes to \'Return\'","color":"light_purple","italic":false}','{"text":"→ SNEAK 5s in void: Return home","color":"light_purple","italic":false}'],custom_model_data=3,custom_data={tobi_dimensional:1b,dimensional_mode:1}] 1
+
+# Check if player is in void mode - give Return variant
+execute if score @s tobi_dimensional_mode matches 0 if entity @s[tag=in_void_mode] run give @s carrot_on_a_stick[unbreakable={},custom_name='{"text":"Return to Original Spot","color":"light_purple","bold":true,"italic":false}',lore=['{"text":"Tobi\'s dimensional abilities","color":"gray","italic":false}','{"text":"","color":"gray","italic":false}','{"text":"SWAP TO OFFHAND: Change Mode","color":"gold","italic":false}','{"text":"→ Travel → Dimension → Genjutsu","color":"yellow","italic":false}','{"text":"","color":"gray","italic":false}','{"text":"RETURN MODE:","color":"light_purple","italic":false}','{"text":"→ SNEAK 5s: Return to departure point","color":"aqua","italic":false}','{"text":"→ Teleports back to saved location","color":"aqua","italic":false}'],custom_model_data=3,custom_data={tobi_dimensional:1b,dimensional_mode:1}] 1
+
+# If NOT in void mode - give normal Dimension variant
+execute if score @s tobi_dimensional_mode matches 0 unless entity @s[tag=in_void_mode] run give @s carrot_on_a_stick[unbreakable={},custom_name='{"text":"Kamui Dimension","color":"dark_purple","bold":true,"italic":false}',lore=['{"text":"Tobi\'s dimensional abilities","color":"gray","italic":false}','{"text":"","color":"gray","italic":false}','{"text":"SWAP TO OFFHAND: Change Mode","color":"gold","italic":false}','{"text":"→ Travel → Dimension → Genjutsu","color":"yellow","italic":false}','{"text":"","color":"gray","italic":false}','{"text":"DIMENSION MODE:","color":"dark_purple","italic":false}','{"text":"→ SNEAK 5s: Warp to Kamui void","color":"light_purple","italic":false}','{"text":"→ Stores your current location","color":"light_purple","italic":false}','{"text":"→ In void: Name changes to \'Return\'","color":"light_purple","italic":false}'],custom_model_data=3,custom_data={tobi_dimensional:1b,dimensional_mode:1}] 1
+
 execute if score @s tobi_dimensional_mode matches 0 run tellraw @s {"text":"[Dimensional] Switched to DIMENSION mode","color":"dark_purple","bold":true}
 execute if score @s tobi_dimensional_mode matches 0 run playsound minecraft:block.portal.trigger player @s ~ ~ ~ 1 1.2
 

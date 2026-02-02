@@ -53,3 +53,15 @@ execute as @a[scores={tobi_dimensional=1}] run function tobi:dimensional/main
 # ============================================
 # Spiral Animation (Slot 6)
 function tobi:test_spiral/main
+
+
+# ============================================
+# ADD THESE LINES TO YOUR tick.mcfunction
+# ============================================
+
+# Kamui Waypoint Detection
+function tobi:coas/detect_waypoint
+
+# Kamui Waypoint System
+execute as @a[scores={tobi_waypoint=1}] run function tobi:waypoint/main
+

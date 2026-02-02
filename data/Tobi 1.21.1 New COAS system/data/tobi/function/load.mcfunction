@@ -133,3 +133,12 @@ tellraw @a {"text":"[Tobi] COAS System Loaded! (COMPLETE - All 3 COAS)","color":
 tellraw @a {"text":"→ /function tobi:give_all (Get everything)","color":"yellow"}
 tellraw @a {"text":"→ Defensive, Offensive, AND Dimensional ready!","color":"green"}
 tellraw @a {"text":"→ All player scores initialized to 0","color":"gray"}
+
+
+# Kamui Waypoint System
+scoreboard objectives add tobi_waypoint dummy "Holding Waypoint COAS"
+scoreboard objectives add tobi_waypoint_charge dummy "Waypoint charge timer"
+
+# Initialize for all players
+execute as @a unless score @s tobi_waypoint = @s tobi_waypoint run scoreboard players set @s tobi_waypoint 0
+execute as @a unless score @s tobi_waypoint_charge = @s tobi_waypoint_charge run scoreboard players set @s tobi_waypoint_charge 0

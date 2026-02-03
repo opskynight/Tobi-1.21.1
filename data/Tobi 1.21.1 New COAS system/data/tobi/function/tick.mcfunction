@@ -1,12 +1,11 @@
 # ============================================
-# TOBI DATAPACK - TICK (COAS SYSTEM) - FIXED
+# TOBI DATAPACK - TICK (UPDATED WITH GENJUTSU IN DEFENSIVE)
 # ============================================
 
 # ============================================
-# PLAYER INITIALIZATION (CRITICAL FIX!)
+# PLAYER INITIALIZATION
 # ============================================
 # Run initialization for any player who doesn't have scores set
-# This prevents the "undefined score" bug on first join
 execute as @a unless score @s tobi_kamui_active = @s tobi_kamui_active run function tobi:player_join
 
 # --- GLOBAL CHECKS ---
@@ -19,9 +18,10 @@ function tobi:armor/buffs
 function tobi:coas/detect_defensive
 function tobi:coas/detect_offensive
 function tobi:coas/detect_dimensional
+function tobi:coas/detect_waypoint
 
 # ============================================
-# DEFENSIVE STYLE (COAS #1)
+# DEFENSIVE STYLE (COAS #1) - NOW WITH GENJUTSU!
 # ============================================
 execute as @a[scores={tobi_defensive=1}] run function tobi:defensive/main
 
@@ -44,24 +44,18 @@ execute as @a[scores={tobi_offensive=1}] run function tobi:offensive/display
 function tobi:offensive/mode_switch
 
 # ============================================
-# DIMENSIONAL STYLE (COAS #3)
+# DIMENSIONAL STYLE (COAS #3) - GENJUTSU REMOVED!
 # ============================================
+# Now only has Travel (0) and Dimension (1) modes
 execute as @a[scores={tobi_dimensional=1}] run function tobi:dimensional/main
+
+# ============================================
+# WAYPOINT STYLE (COAS #4)
+# ============================================
+execute as @a[scores={tobi_waypoint=1}] run function tobi:waypoint/main
 
 # ============================================
 # LEGACY SYSTEMS
 # ============================================
 # Spiral Animation (Slot 6)
 function tobi:test_spiral/main
-
-
-# ============================================
-# ADD THESE LINES TO YOUR tick.mcfunction
-# ============================================
-
-# Kamui Waypoint Detection
-function tobi:coas/detect_waypoint
-
-# Kamui Waypoint System
-execute as @a[scores={tobi_waypoint=1}] run function tobi:waypoint/main
-

@@ -1,17 +1,27 @@
 # ============================================
-# GENJUTSU DETECT/CLEANUP
+# GENJUTSU DETECT/CLEANUP - FIXED v2
 # ============================================
 # Cleanup when switching modes or losing COAS
+
+# ============================================
+# CRITICAL FIX: Only restore AI when SWITCHING AWAY
+# ============================================
+# Don't touch mobs while player is still in Genjutsu mode!
+
+# When switching away from Genjutsu mode - restore AI and clear tags
+execute as @a unless score @s tobi_defensive_mode matches 1 at @s as @e[tag=genjutsu_target,distance=..25] run data merge entity @s {NoAI:0b}
+execute as @a unless score @s tobi_defensive_mode matches 1 at @s run tag @e[tag=genjutsu_target,distance=..25] remove genjutsu_target
+execute as @a unless score @s tobi_defensive_mode matches 1 at @s run effect clear @e[distance=..25] minecraft:glowing
+
+# When losing armor - restore AI and clear tags
+execute as @a[scores={tobi_has_armor=0}] at @s as @e[tag=genjutsu_target,distance=..25] run data merge entity @s {NoAI:0b}
+execute as @a[scores={tobi_has_armor=0}] at @s run tag @e[tag=genjutsu_target,distance=..25] remove genjutsu_target
 
 # Kill markers when player switches away from Genjutsu mode
 execute as @a unless score @s tobi_defensive_mode matches 1 at @s run kill @e[type=armor_stand,tag=genjutsu_marker,distance=..25]
 
 # Kill markers when player loses armor
 execute as @a[scores={tobi_has_armor=0}] at @s run kill @e[type=armor_stand,tag=genjutsu_marker,distance=..25]
-
-# Remove tags and restore AI when switching away
-execute as @a unless score @s tobi_defensive_mode matches 1 at @s run tag @e[tag=genjutsu_target,distance=..25] remove genjutsu_target
-execute as @a unless score @s tobi_defensive_mode matches 1 at @s run effect clear @e[distance=..25] minecraft:glowing
 
 # Cleanup sneak-frozen mobs when switching away
 execute as @a unless score @s tobi_defensive_mode matches 1 at @s as @e[tag=genjutsu_sneak_target,distance=..15] run data merge entity @s {NoAI:0b}

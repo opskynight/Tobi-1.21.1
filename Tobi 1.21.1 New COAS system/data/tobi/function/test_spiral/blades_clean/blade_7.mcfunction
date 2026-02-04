@@ -1,0 +1,26 @@
+# Blade 7 - High Density Ink Arm
+execute if score @s spiral_scale matches 0.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.80} ^0.21 ^-0.21 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 4.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.78} ^0.30 ^-0.24 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 8.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.76} ^0.41 ^-0.25 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 12.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.74} ^0.51 ^-0.23 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 16.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.72} ^0.62 ^-0.20 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 20.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.70} ^0.72 ^-0.14 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 25.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.68} ^0.82 ^-0.05 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 29.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.65} ^0.91 ^0.05 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 33.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.63} ^0.98 ^0.17 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 37.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.61} ^1.04 ^0.32 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 41.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.59} ^1.08 ^0.47 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 45.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.57} ^1.09 ^0.64 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 50.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.55} ^1.07 ^0.82 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 54.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.53} ^1.03 ^1.01 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 58.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.51} ^0.95 ^1.19 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 62.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.49} ^0.85 ^1.37 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 66.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.47} ^0.72 ^1.54 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 70.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.45} ^0.56 ^1.70 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 75.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.43} ^0.37 ^1.84 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 79.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.40} ^0.15 ^1.96 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 83.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.38} ^-0.09 ^2.05 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 87.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.36} ^-0.35 ^2.11 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 91.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.34} ^-0.62 ^2.14 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 95.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.32} ^-0.91 ^2.13 ^0.5 0 0 0 0 1 force
+execute if score @s spiral_scale matches 100.. at @s anchored eyes run particle minecraft:dust{color:[0,0,0],scale:0.30} ^-1.20 ^2.08 ^0.5 0 0 0 0 1 force

@@ -16,3 +16,8 @@ execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=0,tobi_has_armor=1},p
 # Long Range - handled by cooldown.mcfunction
 
 # Return - handled by cooldown.mcfunction
+
+# Travel - Idle (not charging, not in spectator)
+execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=3,tobi_has_armor=1,tobi_kamui_charge=0,tobi_kamui_active=0}] run title @s actionbar {"text":"◈ TRAVEL: SNEAK 5s for Spectator ◈","color":"aqua","bold":true}
+
+# Travel - In spectator (handled by detect_stillness progress bar)

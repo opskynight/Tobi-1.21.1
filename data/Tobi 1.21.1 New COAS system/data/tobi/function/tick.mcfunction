@@ -37,6 +37,9 @@ execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=1}] run function tobi
 # RETURN (Mode 2)
 execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=2}] run function tobi:offensive/return_mode/main
 
+# KAMUI TRAVEL (Mode 3)
+execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=3}] run function tobi:offensive/kamui_travel/main
+
 # General display
 execute as @a[scores={tobi_offensive=1}] run function tobi:offensive/display
 
@@ -44,9 +47,17 @@ execute as @a[scores={tobi_offensive=1}] run function tobi:offensive/display
 function tobi:offensive/mode_switch
 
 # ============================================
-# DIMENSIONAL STYLE (COAS #3) - GENJUTSU REMOVED!
+# KAMUI TRAVEL SAFETY NET
 # ============================================
-# Now only has Travel (0) and Dimension (1) modes
+# detect_stillness runs INDEPENDENTLY of tobi_offensive.
+# If the player is stuck in spectator for any reason —
+# even if the COAS stick vanished and tobi_offensive dropped to 0 —
+# this still ticks so they can stand still and exit spectator.
+execute as @a[scores={tobi_kamui_active=1}] run function tobi:offensive/kamui_travel/detect_stillness
+
+# ============================================
+# DIMENSIONAL STYLE (COAS #3) - TRAVEL REMOVED, NOW ONLY DIMENSION (1)
+# ============================================
 execute as @a[scores={tobi_dimensional=1}] run function tobi:dimensional/main
 
 # ============================================

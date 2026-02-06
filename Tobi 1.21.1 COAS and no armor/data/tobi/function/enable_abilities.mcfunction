@@ -1,5 +1,5 @@
 # ============================================
-# ENABLE TOBI ABILITIES
+# ENABLE TOBI ABILITIES - FIXED
 # ============================================
 # Called by toggle_abilities.mcfunction
 
@@ -15,6 +15,9 @@ tag @s add tobi_abilities_enabled
 
 # Mark as having effects applied
 tag @s add tobi_effects_applied
+
+# CRITICAL FIX: Set the armor score to 1 (no armor required)
+scoreboard players set @s tobi_has_armor 1
 
 # Success message
 tellraw @s {"text":"[Tobi] Abilities ENABLED!","color":"gold","bold":true}

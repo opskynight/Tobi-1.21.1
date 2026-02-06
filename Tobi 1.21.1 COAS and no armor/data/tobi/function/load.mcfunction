@@ -1,10 +1,13 @@
 # ============================================
-# TOBI DATAPACK - LOAD (COAS SYSTEM) - UPDATED WITH GENJUTSU
+# TOBI DATAPACK - LOAD (COAS SYSTEM) - FIXED NO ARMOR
 # ============================================
 
 # Core Logic
 scoreboard objectives add tobi_slot dummy
 scoreboard objectives add tobi_death deathCount
+
+# CRITICAL FIX: Add armor detection score (now manual toggle instead of armor detection)
+scoreboard objectives add tobi_has_armor dummy "Abilities enabled flag"
 
 # ============================================
 # COAS DETECTION SCORES
@@ -36,9 +39,9 @@ scoreboard objectives add tobi_genjutsu_sneak_timer dummy "Sneak freeze timer"
 scoreboard objectives add tobi_used_coas minecraft.used:minecraft.carrot_on_a_stick "Right click detection"
 
 # ============================================
-# OFFENSIVE STYLE (Short/Long/Return)
+# OFFENSIVE STYLE (Short/Long/Return/Travel)
 # ============================================
-scoreboard objectives add tobi_offensive_mode dummy "0=Short, 1=Long, 2=Return"
+scoreboard objectives add tobi_offensive_mode dummy "0=Short, 1=Long, 2=Return, 3=Travel"
 
 # Short Range (Mode 0)
 scoreboard objectives add tobi_short_range_charge dummy "Short range charge timer"
@@ -61,7 +64,7 @@ scoreboard objectives add tobi_temp_x dummy
 scoreboard objectives add tobi_temp_health dummy
 
 # ============================================
-# DIMENSIONAL STYLE (Travel/Dimension) - GENJUTSU REMOVED!
+# DIMENSIONAL STYLE (Travel/Dimension)
 # ============================================
 scoreboard objectives add tobi_dimensional_mode dummy "0=Travel, 1=Dimension"
 
@@ -82,7 +85,7 @@ scoreboard objectives add tobi_return_y dummy "Return Y coordinate"
 scoreboard objectives add tobi_return_z dummy "Return Z coordinate"
 scoreboard objectives add tobi_return_dim dummy "Return dimension ID"
 
-# Genjutsu damage calculation (now used by Defensive, not Dimensional)
+# Genjutsu damage calculation (used by Defensive)
 scoreboard objectives add tobi_genjutsu_dmg dummy "Genjutsu damage calc"
 scoreboard objectives add tobi_genjutsu_timer dummy "Genjutsu damage cooldown"
 
@@ -99,13 +102,14 @@ scoreboard objectives add tobi_waypoint_charge dummy "Waypoint charge timer"
 # ============================================
 # EXTRA FEATURES (Legacy)
 # ============================================
-# Spiral Animation (Slot 6 - keeping separate)
+# Spiral Animation (Slot 6)
 scoreboard objectives add spiral_state dummy
 scoreboard objectives add spiral_scale dummy
 scoreboard objectives add spiral_timer dummy
 scoreboard objectives add spiral_rotation dummy
+scoreboard objectives add spiral_test_mode dummy "Spiral test mode flag"
 
-# Barrier Timer (keeping for legacy compatibility)
+# Barrier Timer
 scoreboard objectives add tobi_barrier_timer dummy
 
 # ============================================
@@ -113,6 +117,7 @@ scoreboard objectives add tobi_barrier_timer dummy
 # ============================================
 
 # Core scores
+execute as @a unless score @s tobi_has_armor = @s tobi_has_armor run scoreboard players set @s tobi_has_armor 0
 execute as @a unless score @s tobi_defensive = @s tobi_defensive run scoreboard players set @s tobi_defensive 0
 execute as @a unless score @s tobi_offensive = @s tobi_offensive run scoreboard players set @s tobi_offensive 0
 execute as @a unless score @s tobi_dimensional = @s tobi_dimensional run scoreboard players set @s tobi_dimensional 0
@@ -164,10 +169,6 @@ execute as @a unless score @s tobi_temp_y = @s tobi_temp_y run scoreboard player
 execute as @a unless score @s tobi_temp_z = @s tobi_temp_z run scoreboard players set @s tobi_temp_z 0
 execute as @a unless score @s tobi_temp_health = @s tobi_temp_health run scoreboard players set @s tobi_temp_health 0
 
-tellraw @a {"text":"[Tobi] COAS System Loaded! (Genjutsu moved to Defensive)","color":"gold","bold":true}
-tellraw @a {"text":"→ Defensive now has 2 modes: Invulnerability + Genjutsu","color":"yellow"}
-tellraw @a {"text":"→ Dimensional now has 2 modes: Travel + Dimension","color":"yellow"}
-tellraw @a {"text":"→ /function tobi:give_all (Get everything)","color":"green"}
-
-# Add to existing scoreboards (around line 60-90):
-scoreboard objectives add spiral_test_mode dummy "Spiral test mode flag"
+tellraw @a {"text":"[Tobi] COAS System Loaded! (No Armor Required)","color":"gold","bold":true}
+tellraw @a {"text":"→ Use /function tobi:toggle_abilities to enable/disable powers","color":"yellow"}
+tellraw @a {"text":"→ /function tobi:give_all (Get all COAS items)","color":"green"}

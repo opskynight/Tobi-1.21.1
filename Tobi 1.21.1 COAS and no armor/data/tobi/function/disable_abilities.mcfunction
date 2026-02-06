@@ -1,5 +1,5 @@
 # ============================================
-# DISABLE TOBI ABILITIES
+# DISABLE TOBI ABILITIES - FIXED
 # ============================================
 # Called by toggle_abilities.mcfunction
 
@@ -15,6 +15,9 @@ tag @s remove tobi_abilities_enabled
 
 # Remove effects tag
 tag @s remove tobi_effects_applied
+
+# CRITICAL FIX: Reset the armor score to 0
+scoreboard players set @s tobi_has_armor 0
 
 # Success message
 tellraw @s {"text":"[Tobi] Abilities DISABLED!","color":"red","bold":true}

@@ -1,10 +1,11 @@
 # ============================================
-# PLAYER JOIN INITIALIZATION (UPDATED WITH GENJUTSU)
+# PLAYER JOIN INITIALIZATION - FIXED
 # ============================================
 # This function initializes all scores for players who just joined
 # Runs automatically when a player logs in for the first time
 
 # Core scores
+execute unless score @s tobi_has_armor = @s tobi_has_armor run scoreboard players set @s tobi_has_armor 0
 execute unless score @s tobi_defensive = @s tobi_defensive run scoreboard players set @s tobi_defensive 0
 execute unless score @s tobi_offensive = @s tobi_offensive run scoreboard players set @s tobi_offensive 0
 execute unless score @s tobi_dimensional = @s tobi_dimensional run scoreboard players set @s tobi_dimensional 0
@@ -68,4 +69,5 @@ execute unless score @s tobi_temp_z = @s tobi_temp_z run scoreboard players set 
 execute unless score @s tobi_temp_health = @s tobi_temp_health run scoreboard players set @s tobi_temp_health 0
 
 # Welcome message
-tellraw @s {"text":"[Tobi] Player scores initialized! (Genjutsu now in Defensive)","color":"green"}
+tellraw @s {"text":"[Tobi] Player scores initialized! (No armor required)","color":"green"}
+tellraw @s {"text":"→ Use /function tobi:toggle_abilities to enable your powers!","color":"yellow"}

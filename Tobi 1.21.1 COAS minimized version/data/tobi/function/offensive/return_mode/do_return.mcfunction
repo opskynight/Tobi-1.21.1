@@ -28,4 +28,4 @@ playsound minecraft:entity.enderman.teleport player @s ~ ~ ~ 1 1.5
 execute at @s run particle minecraft:explosion ~ ~1 ~ 1 1 1 0 10 force
 
 # Start cooldown
-scoreboard players set @s tobi_cooldown 1
+scoreboard players set @s tobi_return_cooldown 1

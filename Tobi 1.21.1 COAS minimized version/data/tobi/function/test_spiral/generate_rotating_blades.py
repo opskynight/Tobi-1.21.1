@@ -3,7 +3,7 @@ import math
 import re
 
 # Your actual path to test_spiral folder
-BASE_PATH = r"C:\Users\nthan\curseforge\minecraft\Instances\1.21.1 tobi\saves\H2\datapacks\Tobi 1.21.1 New COAS system\data\tobi\function\test_spiral"
+BASE_PATH = r"C:\Users\nthan\curseforge\minecraft\Instances\1.21.1 tobi\saves\E\datapacks\Tobi 1.21.1 new kamui test\data\tobi\function\test_spiral"
 
 # Path to clean blades folder
 BLADES_FOLDER = os.path.join(BASE_PATH, "blades_clean")

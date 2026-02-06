@@ -4,7 +4,7 @@
 # Tag all entities within 3 blocks - NO complex conditions
 
 # If player has offensive=1, mode=0, and armor, tag nearby entities
-execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=0,tobi_enabled=1}] at @s run tag @e[type=!player,type=!armor_stand,type=!item,type=!experience_orb,distance=..3] add short_range_target
+execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=0,tobi_has_armor=1}] at @s run tag @e[type=!player,type=!armor_stand,type=!item,type=!experience_orb,distance=..3] add short_range_target
 
 # Apply glowing to all tagged entities
 execute as @e[tag=short_range_target] run effect give @s minecraft:glowing 1 0 true

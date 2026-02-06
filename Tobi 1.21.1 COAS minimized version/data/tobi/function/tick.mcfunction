@@ -1,20 +1,17 @@
 # ============================================
-# TOBI DATAPACK - TICK (WITH SPIRAL ENABLED)
+# TOBI DATAPACK - TICK (COAS SYSTEM) - FIXED
 # ============================================
 
 # ============================================
-# PLAYER INITIALIZATION
+# PLAYER INITIALIZATION (CRITICAL FIX!)
 # ============================================
+# Run initialization for any player who doesn't have scores set
+# This prevents the "undefined score" bug on first join
 execute as @a unless score @s tobi_kamui_active = @s tobi_kamui_active run function tobi:player_join
 
 # --- GLOBAL CHECKS ---
-# Handle death (reapply effects if abilities enabled)
-function tobi:handle_death
-
-# ============================================
-# SLOT DETECTION (FOR SPIRAL ANIMATION)
-# ============================================
-function tobi:detect_slot
+function tobi:armor/detect
+function tobi:armor/buffs
 
 # ============================================
 # COAS DETECTION
@@ -22,7 +19,6 @@ function tobi:detect_slot
 function tobi:coas/detect_defensive
 function tobi:coas/detect_offensive
 function tobi:coas/detect_dimensional
-function tobi:coas/detect_waypoint
 
 # ============================================
 # DEFENSIVE STYLE (COAS #1)
@@ -32,12 +28,20 @@ execute as @a[scores={tobi_defensive=1}] run function tobi:defensive/main
 # ============================================
 # OFFENSIVE STYLE (COAS #2)
 # ============================================
-execute as @a[scores={tobi_offensive=1}] run function tobi:offensive/main
+# SHORT RANGE (Mode 0)
+execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=0}] run function tobi:offensive/short_range/main
 
-# ============================================
-# KAMUI TRAVEL SAFETY NET
-# ============================================
-execute as @a[scores={tobi_kamui_active=1}] run function tobi:offensive/kamui_travel/detect_stillness
+# LONG RANGE (Mode 1)
+execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=1}] run function tobi:offensive/long_range/main
+
+# RETURN (Mode 2)
+execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=2}] run function tobi:offensive/return_mode/main
+
+# General display
+execute as @a[scores={tobi_offensive=1}] run function tobi:offensive/display
+
+# Mode switching
+function tobi:offensive/mode_switch
 
 # ============================================
 # DIMENSIONAL STYLE (COAS #3)
@@ -45,11 +49,7 @@ execute as @a[scores={tobi_kamui_active=1}] run function tobi:offensive/kamui_tr
 execute as @a[scores={tobi_dimensional=1}] run function tobi:dimensional/main
 
 # ============================================
-# WAYPOINT STYLE (COAS #4)
+# LEGACY SYSTEMS
 # ============================================
-execute as @a[scores={tobi_waypoint=1}] run function tobi:waypoint/main
-
-# ============================================
-# SPIRAL ANIMATION (SLOT 6) - NOW ENABLED!
-# ============================================
+# Spiral Animation (Slot 6)
 function tobi:test_spiral/main

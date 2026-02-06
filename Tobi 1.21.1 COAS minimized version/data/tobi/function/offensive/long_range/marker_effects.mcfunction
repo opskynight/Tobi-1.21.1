@@ -11,7 +11,7 @@ execute as @e[type=armor_stand,tag=kamui_marker] at @s run effect give @e[type=!
 execute as @e[type=armor_stand,tag=kamui_marker] at @s run tag @e[type=!player,type=!armor_stand,type=!item,type=!experience_orb,distance=..2.5] add kamui_target
 
 # FREEZE entities by removing AI when player is SNEAKING in mode 1
-execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=1,tobi_enabled=1},predicate=tobi:is_sneaking] at @s as @e[tag=kamui_target,distance=..30] run data merge entity @s {NoAI:1b}
+execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=1,tobi_has_armor=1},predicate=tobi:is_sneaking] at @s as @e[tag=kamui_target,distance=..30] run data merge entity @s {NoAI:1b}
 
 # UNFREEZE entities (restore AI) when player is NOT sneaking
 execute as @a[scores={tobi_offensive_mode=1}] unless predicate tobi:is_sneaking at @s as @e[tag=kamui_target,distance=..30,nbt={NoAI:1b}] run data merge entity @s {NoAI:0b}

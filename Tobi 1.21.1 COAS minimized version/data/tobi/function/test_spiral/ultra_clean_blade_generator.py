@@ -5,7 +5,7 @@ import shutil
 # ============================================
 # CONFIGURATION
 # ============================================
-BASE_PATH = r"C:\Users\nthan\curseforge\minecraft\Instances\1.21.1 tobi\saves\E\datapacks\Tobi 1.21.1 new kamui test\data\tobi\function\test_spiral"
+BASE_PATH = r"C:\Users\nthan\curseforge\minecraft\Instances\1.21.1 tobi\saves\H2\datapacks\Tobi 1.21.1 New COAS system\data\tobi\function\test_spiral"
 CLEAN_FOLDER = os.path.join(BASE_PATH, "blades_clean")
 ROTATED_FOLDER = os.path.join(BASE_PATH, "blades_rotated")
 

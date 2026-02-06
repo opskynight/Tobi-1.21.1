@@ -1,5 +1,5 @@
 # ============================================
-# APPLY ATTRIBUTES WHEN TOBI ARMOR IS EQUIPPED
+# APPLY ATTRIBUTES WHEN ABILITIES ENABLED
 # ============================================
 
 # Health (+20 HP = 40 total)
@@ -23,8 +23,11 @@ attribute @s minecraft:generic.step_height base set 2
 # Fire Immunity (0 burning time = instant extinguish)
 attribute @s minecraft:generic.burning_time base set 0
 
+# Knockback Resistance (100% immunity to knockback)
+attribute @s minecraft:generic.knockback_resistance base set 1.0
+
 # Mark player as having attributes applied
 tag @s add tobi_attributes_applied
 
 # Feedback message
-tellraw @s {"text":"[Tobi] Armor attributes applied! (40 HP, no fall/fire damage, +2 step height)","color":"gold","bold":true}
+tellraw @s {"text":"[Tobi] Attributes applied! (40 HP, knockback immunity, no fall/fire damage, +2 step height)","color":"gold","bold":true}

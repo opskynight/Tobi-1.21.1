@@ -25,7 +25,7 @@ playsound minecraft:entity.enderman.teleport player @s ~ ~ ~ 1 0.8
 execute at @s run particle minecraft:portal ~ ~1 ~ 1 1 1 0.5 50 force
 
 # Start cooldown for the player
-scoreboard players set @s tobi_return_cooldown 1
+scoreboard players set @s tobi_cooldown 1
 
 # Reset charge after activation
-scoreboard players set @s tobi_return_charge 0
+scoreboard players set @s tobi_charge 0

@@ -3,8 +3,8 @@
 # ============================================
 # Run this if your ability is stuck
 
-scoreboard players set @s tobi_short_range_cooldown 0
-scoreboard players set @s tobi_short_range_charge 0
+scoreboard players set @s tobi_cooldown 0
+scoreboard players set @s tobi_charge 0
 
 # Clean up any tagged entities
 execute at @s run tag @e[tag=short_range_target,distance=..20] remove short_range_target

@@ -33,6 +33,7 @@ scoreboard objectives add tobi_genjutsu_ray_hit dummy "Genjutsu raycast hit"
 
 # Genjutsu sneak freeze
 scoreboard objectives add tobi_genjutsu_sneak_freeze dummy "Sneak freeze state"
+scoreboard objectives add tobi_genjutsu_sneak_timer dummy "Sneak freeze timer (DEDICATED)"
 scoreboard objectives add tobi_charge dummy "Universal charge timer"
 
 # Genjutsu right click detection
@@ -125,6 +126,7 @@ execute as @a unless score @s tobi_underground = @s tobi_underground run scorebo
 execute as @a unless score @s tobi_genjutsu_ray_distance = @s tobi_genjutsu_ray_distance run scoreboard players set @s tobi_genjutsu_ray_distance 0
 execute as @a unless score @s tobi_genjutsu_ray_hit = @s tobi_genjutsu_ray_hit run scoreboard players set @s tobi_genjutsu_ray_hit 0
 execute as @a unless score @s tobi_genjutsu_sneak_freeze = @s tobi_genjutsu_sneak_freeze run scoreboard players set @s tobi_genjutsu_sneak_freeze 0
+execute as @a unless score @s tobi_genjutsu_sneak_timer = @s tobi_genjutsu_sneak_timer run scoreboard players set @s tobi_genjutsu_sneak_timer 0
 execute as @a unless score @s tobi_charge = @s tobi_charge run scoreboard players set @s tobi_charge 0
 
 # Offensive scores

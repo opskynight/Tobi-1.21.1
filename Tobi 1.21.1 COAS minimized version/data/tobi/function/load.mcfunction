@@ -1,12 +1,12 @@
 # ============================================
-# TOBI DATAPACK - LOAD (COAS SYSTEM) - FIXED NO ARMOR
+# TOBI DATAPACK - LOAD (COAS SYSTEM) - FIXED
 # ============================================
 
 # Core Logic
 scoreboard objectives add tobi_slot dummy
 scoreboard objectives add tobi_death deathCount
 
-# CRITICAL FIX: Add armor detection score (now manual toggle instead of armor detection)
+# CRITICAL: Add enabled score (manual toggle)
 scoreboard objectives add tobi_enabled dummy "Abilities enabled flag"
 
 # ============================================
@@ -33,7 +33,7 @@ scoreboard objectives add tobi_genjutsu_ray_hit dummy "Genjutsu raycast hit"
 
 # Genjutsu sneak freeze
 scoreboard objectives add tobi_genjutsu_sneak_freeze dummy "Sneak freeze state"
-scoreboard objectives add tobi_charge dummy "Sneak freeze timer"
+scoreboard objectives add tobi_charge dummy "Universal charge timer"
 
 # Genjutsu right click detection
 scoreboard objectives add tobi_used_coas minecraft.used:minecraft.carrot_on_a_stick "Right click detection"
@@ -43,19 +43,14 @@ scoreboard objectives add tobi_used_coas minecraft.used:minecraft.carrot_on_a_st
 # ============================================
 scoreboard objectives add tobi_offensive_mode dummy "0=Short, 1=Long, 2=Return, 3=Travel"
 
-# Short Range (Mode 0)
-scoreboard objectives add tobi_charge dummy "Short range charge timer"
-scoreboard objectives add tobi_cooldown dummy "Short range cooldown"
+# Universal cooldown
+scoreboard objectives add tobi_cooldown dummy "Universal cooldown"
 
-# Long Range (Mode 1)
+# Raycast
 scoreboard objectives add tobi_ray_distance dummy
 scoreboard objectives add tobi_ray_hit dummy
-scoreboard objectives add tobi_charge dummy
-scoreboard objectives add tobi_cooldown dummy
 
-# Return (Mode 2)
-scoreboard objectives add tobi_cooldown dummy
-scoreboard objectives add tobi_charge dummy
+# Entity tracking
 scoreboard objectives add tobi_entity_marked dummy
 scoreboard objectives add tobi_maintain_timer dummy
 
@@ -79,7 +74,6 @@ scoreboard objectives add tobi_temp_y dummy "Temp Y storage"
 scoreboard objectives add tobi_temp_z dummy "Temp Z storage"
 
 # Dimension Mode (Mode 1)
-scoreboard objectives add tobi_charge dummy "Dimension warp charge"
 scoreboard objectives add tobi_return_x dummy "Return X coordinate"
 scoreboard objectives add tobi_return_y dummy "Return Y coordinate"
 scoreboard objectives add tobi_return_z dummy "Return Z coordinate"
@@ -95,19 +89,13 @@ scoreboard players set #100 tobi_genjutsu_dmg 100
 scoreboard players set #20 tobi_genjutsu_dmg 20
 
 # ============================================
-# WAYPOINT SYSTEM
-# ============================================
-scoreboard objectives add tobi_charge dummy "Waypoint charge timer"
-
-# ============================================
-# EXTRA FEATURES (Legacy)
+# EXTRA FEATURES
 # ============================================
 # Spiral Animation (Slot 6)
 scoreboard objectives add spiral_state dummy
 scoreboard objectives add spiral_scale dummy
 scoreboard objectives add spiral_timer dummy
 scoreboard objectives add spiral_rotation dummy
-scoreboard objectives add spiral_test_mode dummy "Spiral test mode flag"
 
 # Barrier Timer
 scoreboard objectives add tobi_barrier_timer dummy
@@ -116,7 +104,7 @@ scoreboard objectives add tobi_barrier_timer dummy
 # INITIALIZE ALL PLAYER SCORES TO 0
 # ============================================
 
-# Core scores
+# Core scores - INITIALIZE TO 0
 execute as @a unless score @s tobi_enabled = @s tobi_enabled run scoreboard players set @s tobi_enabled 0
 execute as @a unless score @s tobi_defensive = @s tobi_defensive run scoreboard players set @s tobi_defensive 0
 execute as @a unless score @s tobi_offensive = @s tobi_offensive run scoreboard players set @s tobi_offensive 0
@@ -136,23 +124,14 @@ execute as @a unless score @s tobi_charge = @s tobi_charge run scoreboard player
 
 # Offensive scores
 execute as @a unless score @s tobi_offensive_mode = @s tobi_offensive_mode run scoreboard players set @s tobi_offensive_mode 0
-execute as @a unless score @s tobi_charge = @s tobi_charge run scoreboard players set @s tobi_charge 0
 execute as @a unless score @s tobi_cooldown = @s tobi_cooldown run scoreboard players set @s tobi_cooldown 0
 execute as @a unless score @s tobi_ray_distance = @s tobi_ray_distance run scoreboard players set @s tobi_ray_distance 0
-execute as @a unless score @s tobi_charge = @s tobi_charge run scoreboard players set @s tobi_charge 0
-execute as @a unless score @s tobi_cooldown = @s tobi_cooldown run scoreboard players set @s tobi_cooldown 0
-execute as @a unless score @s tobi_cooldown = @s tobi_cooldown run scoreboard players set @s tobi_cooldown 0
-execute as @a unless score @s tobi_charge = @s tobi_charge run scoreboard players set @s tobi_charge 0
 
 # Dimensional scores
 execute as @a unless score @s tobi_dimensional_mode = @s tobi_dimensional_mode run scoreboard players set @s tobi_dimensional_mode 0
 execute as @a unless score @s tobi_kamui_charge = @s tobi_kamui_charge run scoreboard players set @s tobi_kamui_charge 0
 execute as @a unless score @s tobi_kamui_active = @s tobi_kamui_active run scoreboard players set @s tobi_kamui_active 0
 execute as @a unless score @s tobi_kamui_stillness = @s tobi_kamui_stillness run scoreboard players set @s tobi_kamui_stillness 0
-execute as @a unless score @s tobi_charge = @s tobi_charge run scoreboard players set @s tobi_charge 0
-
-# Waypoint scores
-execute as @a unless score @s tobi_charge = @s tobi_charge run scoreboard players set @s tobi_charge 0
 
 # Spiral scores
 execute as @a unless score @s spiral_state = @s spiral_state run scoreboard players set @s spiral_state 0
@@ -170,5 +149,5 @@ execute as @a unless score @s tobi_temp_z = @s tobi_temp_z run scoreboard player
 execute as @a unless score @s tobi_temp_health = @s tobi_temp_health run scoreboard players set @s tobi_temp_health 0
 
 tellraw @a {"text":"[Tobi] COAS System Loaded! (No Armor Required)","color":"gold","bold":true}
-tellraw @a {"text":"→ Use /function tobi:toggle to enable/disable powers","color":"yellow"}
-tellraw @a {"text":"→ /function tobi:give_all (Get all COAS items)","color":"green"}
+tellraw @a {"text":"→ Use /function tobi:toggle_abilities to enable/disable powers","color":"yellow"}
+tellraw @a {"text":"→ /function tobi:coas/give_defensive (etc) to get COAS items","color":"green"}

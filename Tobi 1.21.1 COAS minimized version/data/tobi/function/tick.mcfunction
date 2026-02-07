@@ -2,11 +2,6 @@
 # TOBI DATAPACK - TICK (WITH WAYPOINT CREATOR)
 # ============================================
 
-# ============================================
-# PLAYER INITIALIZATION
-# ============================================
-execute as @a unless score @s tobi_kamui_active = @s tobi_kamui_active run function tobi:player_join
-
 # --- GLOBAL CHECKS ---
 # Handle death (reapply effects if abilities enabled)
 function tobi:handle_death

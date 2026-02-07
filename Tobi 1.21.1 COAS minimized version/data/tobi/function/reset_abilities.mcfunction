@@ -1,8 +1,13 @@
 # ============================================
-# PLAYER JOIN INITIALIZATION - FIXED
+# RESET ABILITIES - MANUAL FIX COMMAND
 # ============================================
-# This function initializes all scores for players who just joined
-# Runs automatically when a player logs in for the first time
+# Usage: /function tobi:reset_abilities
+# Use when:
+#  - Starting a new world
+#  - Abilities glitching after code changes
+#  - Scores in invalid states during testing
+#
+# This initializes/resets ALL scores to default values
 
 # Core scores
 execute unless score @s tobi_enabled = @s tobi_enabled run scoreboard players set @s tobi_enabled 0

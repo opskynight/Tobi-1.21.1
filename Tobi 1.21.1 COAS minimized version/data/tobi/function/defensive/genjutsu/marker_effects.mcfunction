@@ -19,8 +19,5 @@ execute as @e[tag=genjutsu_target,tag=!genjutsu_sneak_target] at @s unless entit
 execute as @e[tag=genjutsu_target,tag=!genjutsu_sneak_target] at @s unless entity @e[type=armor_stand,tag=genjutsu_marker,distance=..7] run tag @s remove genjutsu_target
 execute as @e[tag=genjutsu_target,tag=!genjutsu_sneak_target] at @s unless entity @e[type=armor_stand,tag=genjutsu_marker,distance=..7] run effect clear @s minecraft:glowing
 
-# Particle effect at marker location - subtle portal particles
-execute as @e[type=armor_stand,tag=genjutsu_marker] at @s run particle minecraft:portal ~ ~1 ~ 0.2 0.3 0.2 0.05 5 force
-
 # Glowing outline particle (7x7 area indicator) - UPDATED range
 execute as @e[type=armor_stand,tag=genjutsu_marker] at @s run particle minecraft:witch ~ ~0.5 ~ 3.5 3.5 3.5 0 3 force

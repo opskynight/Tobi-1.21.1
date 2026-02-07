@@ -1,12 +1,12 @@
 # ============================================
-# SHORT RANGE - TAG ENTITIES (ULTRA SIMPLE)
+# SHORT RANGE - TAG ENTITIES (INSTANT RESPONSE)
 # ============================================
-# Tag all entities within 3 blocks - NO complex conditions
+# ALWAYS tag entities immediately when conditions are met
 
-# If player has offensive=1, mode=0, and armor, tag nearby entities
+# Tag entities within 3 blocks INSTANTLY (no charge requirement)
 execute as @a[scores={tobi_offensive=1,tobi_offensive_mode=0,tobi_enabled=1}] at @s run tag @e[type=!player,type=!armor_stand,type=!item,type=!experience_orb,distance=..3] add short_range_target
 
-# Apply glowing to all tagged entities
+# Apply glowing INSTANTLY
 execute as @e[tag=short_range_target] run effect give @s minecraft:glowing 1 0 true
 
 # Particle effect around tagged entities
